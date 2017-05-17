@@ -1,4 +1,4 @@
-package com.yazhi1992.yazhilib.base;
+package com.yazhi1992.yazhilib.widget.Dialog;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

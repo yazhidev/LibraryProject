@@ -8,7 +8,7 @@ import android.view.View;
  * Created by zengyazhi on 17/5/16.
  */
 
-public class StateUtils {
+public class StatusUtil {
 
     /**
      * 获得软键盘是否调起

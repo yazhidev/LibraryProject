@@ -1,4 +1,4 @@
-package com.yazhi1992.yazhilib.base;
+package com.yazhi1992.yazhilib.widget.Dialog;
 
 import android.app.Dialog;
 import android.content.Context;

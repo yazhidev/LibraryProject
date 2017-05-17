@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.yazhi1992.yazhilib.base.BaseBottomDialog;
+import com.yazhi1992.yazhilib.widget.Dialog.BaseBottomDialog;
 
 /**
  * Created by zengyazhi on 17/5/16.
