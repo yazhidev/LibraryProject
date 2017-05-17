@@ -3,6 +3,7 @@ package com.yazhi1992.yazhilib.widget.RoundView;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -11,8 +12,6 @@ import android.widget.TextView;
 
 public class RoundTextView extends TextView {
     private RoundViewDelegate mDelegate;
-    private int mWidth;
-    private int mHeight;
 
     public RoundTextView(Context context) {
         this(context, null);
@@ -35,12 +34,5 @@ public class RoundTextView extends TextView {
         } else {
             mDelegate.setBgSelector();
         }
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        mWidth = w;
-        mHeight = h;
     }
 }
