@@ -9,7 +9,7 @@ import android.util.TypedValue;
 
 public class CalcUtil {
 
-    protected static float dp2px(Context Context, int dp) {
+    public static float dp2px(Context Context, int dp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Context.getResources().getDisplayMetrics());
     }
 

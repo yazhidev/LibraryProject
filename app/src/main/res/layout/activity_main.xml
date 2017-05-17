@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,29 +7,27 @@
     android:layout_height="match_parent"
     tools:context="com.yazhi1992.libraryproject.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"/>
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text="Button"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="2dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="2dp"/>
+        android:text="Button"/>
 
-</android.support.constraint.ConstraintLayout>
+    <com.yazhi1992.yazhilib.widget.RoundView.RoundTextView
+        android:id="@+id/mytv"
+        android:layout_width="100dp"
+        android:layout_margin="20dp"
+        android:text="adfasdf"
+        android:padding="20dp"
+        android:layout_below="@+id/button"
+        app:rv_cornerRadius="5dp"
+        app:rv_backgroundColor="#dddddd"
+        app:rv_backgroundPressColor="#333333"
+        android:textColor="#991991"
+        app:rv_isRippleEnable="false"
+        app:rv_isCircleRound="true"
+        app:rv_textPressColor="#ffffff"
+        android:layout_height="130dp"/>
+
+</RelativeLayout>

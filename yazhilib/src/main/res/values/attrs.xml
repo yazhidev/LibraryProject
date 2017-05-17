@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 以下是重用attr的正确姿势,一切为了在布局中可以自动提示-->
+    <!-- 圆角矩形背景色 -->
+    <attr name="rv_backgroundColor" format="color"/>
+    <!-- 圆角矩形背景色press -->
+    <attr name="rv_backgroundPressColor" format="color"/>
+    <!-- 圆角弧度,单位dp-->
+    <attr name="rv_cornerRadius" format="dimension"/>
+    <!-- 圆角弧度,单位dp-->
+    <attr name="rv_strokeWidth" format="dimension"/>
+    <!-- 圆角边框颜色-->
+    <attr name="rv_strokeColor" format="color"/>
+    <!-- 圆角边框颜色press -->
+    <attr name="rv_strokePressColor" format="color"/>
+    <!-- 文字颜色press-->
+    <attr name="rv_textPressColor" format="color"/>
+    <!-- 圆角弧度是高度一半-->
+    <attr name="rv_isCircleRound" format="boolean"/>
+    <!-- 圆角弧度,单位dp,TopLeft-->
+    <attr name="rv_cornerRadius_TL" format="dimension"/>
+    <!-- 圆角弧度,单位dp,TopRight-->
+    <attr name="rv_cornerRadius_TR" format="dimension"/>
+    <!-- 圆角弧度,单位dp,BottomLeft-->
+    <attr name="rv_cornerRadius_BL" format="dimension"/>
+    <!-- 圆角弧度,单位dp,BottomRight-->
+    <attr name="rv_cornerRadius_BR" format="dimension"/>
+    <!-- 是否有Ripple效果,api21+有效-->
+    <attr name="rv_isRippleEnable" format="boolean"/>
+
+    <declare-styleable name="RoundTextView">
+        <attr name="rv_backgroundColor"/>
+        <attr name="rv_backgroundPressColor"/>
+        <attr name="rv_cornerRadius"/>
+        <attr name="rv_strokeWidth"/>
+        <attr name="rv_strokeColor"/>
+        <attr name="rv_strokePressColor"/>
+        <attr name="rv_textPressColor"/>
+        <attr name="rv_isCircleRound"/>
+        <attr name="rv_cornerRadius_TL"/>
+        <attr name="rv_cornerRadius_TR"/>
+        <attr name="rv_cornerRadius_BL"/>
+        <attr name="rv_cornerRadius_BR"/>
+        <attr name="rv_isRippleEnable"/>
+    </declare-styleable>
+
+</resources>
