@@ -37,7 +37,7 @@ version = "0.0.1"    //这个是版本号，必须填写
 def siteUrl = 'https://github.com/yazhi1992/LibraryProject' // 项目的主页
 def gitUrl = 'https://github.com/yazhi1992/LibraryProject' // Git仓库的url
 
-group = "com.yazhi1992.yazhiLib" // 这里是groupId ,必须填写  一般填你唯一的包名
+group = "com.yazhi1992.yazhilib" // 这里是groupId ,必须填写  一般填你唯一的包名
 
 install {
     repositories.mavenInstaller {
@@ -132,7 +132,7 @@ bintray {
         userOrg = "yazhi1992"        //发布到JCenter的组织，注意新版本的bintray是需要手动创建的
         repo = "maven"              //发布到JCenter上的仓库名称，注意新版本的bintray是需要手动创建的
         // 发布到Bintray上的项目名字
-        name = "yazhiLib"
+        name = "yazhilib"
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
