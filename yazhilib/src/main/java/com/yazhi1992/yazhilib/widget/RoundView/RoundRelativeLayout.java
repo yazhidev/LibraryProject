@@ -2,24 +2,24 @@ package com.yazhi1992.yazhilib.widget.RoundView;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 /**
- * Created by zengyazhi on 17/5/17.
+ * Created by zengyazhi on 17/5/18.
  */
 
-public class RoundTextView extends TextView {
+public class RoundRelativeLayout extends RelativeLayout {
     private RoundViewDelegate mDelegate;
 
-    public RoundTextView(Context context) {
+    public RoundRelativeLayout(Context context) {
         this(context, null);
     }
 
-    public RoundTextView(Context context, AttributeSet attrs) {
+    public RoundRelativeLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RoundTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RoundRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mDelegate = new RoundViewDelegate(this, context, attrs);
     }

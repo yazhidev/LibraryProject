@@ -16,6 +16,12 @@
     <attr name="rv_strokePressColor" format="color"/>
     <!-- 文字颜色press-->
     <attr name="rv_textPressColor" format="color"/>
+    <!-- disable时文字的颜色-->
+    <attr name="rv_textDisableColor" format="color"/>
+    <!-- disable时边界线的颜色-->
+    <attr name="rv_strokeDisableColor" format="color"/>
+    <!-- disable时背景的颜色-->
+    <attr name="rv_backgroundDisableColor" format="color"/>
     <!-- 圆角弧度是高度一半-->
     <attr name="rv_isCircleRound" format="boolean"/>
     <!-- 圆角弧度,单位dp,TopLeft-->
@@ -26,8 +32,6 @@
     <attr name="rv_cornerRadius_BL" format="dimension"/>
     <!-- 圆角弧度,单位dp,BottomRight-->
     <attr name="rv_cornerRadius_BR" format="dimension"/>
-    <!-- 是否有Ripple效果,api21+有效-->
-    <attr name="rv_isRippleEnable" format="boolean"/>
 
     <declare-styleable name="RoundTextView">
         <attr name="rv_backgroundColor"/>
@@ -42,7 +46,45 @@
         <attr name="rv_cornerRadius_TR"/>
         <attr name="rv_cornerRadius_BL"/>
         <attr name="rv_cornerRadius_BR"/>
-        <attr name="rv_isRippleEnable"/>
+        <attr name="rv_textDisableColor"/>
+        <attr name="rv_backgroundDisableColor"/>
+        <attr name="rv_strokeDisableColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="RoundRelativeLayout">
+        <attr name="rv_backgroundColor"/>
+        <attr name="rv_backgroundPressColor"/>
+        <attr name="rv_cornerRadius"/>
+        <attr name="rv_strokeWidth"/>
+        <attr name="rv_strokeColor"/>
+        <attr name="rv_strokePressColor"/>
+        <attr name="rv_textPressColor"/>
+        <attr name="rv_isCircleRound"/>
+        <attr name="rv_cornerRadius_TL"/>
+        <attr name="rv_cornerRadius_TR"/>
+        <attr name="rv_cornerRadius_BL"/>
+        <attr name="rv_cornerRadius_BR"/>
+        <attr name="rv_textDisableColor"/>
+        <attr name="rv_backgroundDisableColor"/>
+        <attr name="rv_strokeDisableColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="RoundLinearLayout">
+        <attr name="rv_backgroundColor"/>
+        <attr name="rv_backgroundPressColor"/>
+        <attr name="rv_cornerRadius"/>
+        <attr name="rv_strokeWidth"/>
+        <attr name="rv_strokeColor"/>
+        <attr name="rv_strokePressColor"/>
+        <attr name="rv_textPressColor"/>
+        <attr name="rv_isCircleRound"/>
+        <attr name="rv_cornerRadius_TL"/>
+        <attr name="rv_cornerRadius_TR"/>
+        <attr name="rv_cornerRadius_BL"/>
+        <attr name="rv_cornerRadius_BR"/>
+        <attr name="rv_textDisableColor"/>
+        <attr name="rv_backgroundDisableColor"/>
+        <attr name="rv_strokeDisableColor"/>
     </declare-styleable>
 
 </resources>

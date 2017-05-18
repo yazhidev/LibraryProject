@@ -1,7 +1,6 @@
 package com.yazhi1992.yazhilib.widget.Dialog;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ public abstract class BaseBottomDialog<T extends BaseBottomDialog<T>> extends Ba
     protected boolean mIsInnerShowAnim;
     protected boolean mIsInnerDismissAnim;
 
-    public BaseBottomDialog(@NonNull Context context) {
+    public BaseBottomDialog(Context context) {
         super(context);
 
         /*默认的动画*/
@@ -103,7 +102,7 @@ public abstract class BaseBottomDialog<T extends BaseBottomDialog<T>> extends Ba
     }
 
     @Override
-    public boolean onTouchEvent(@NonNull MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event) {
         if(mIsInnerShowAnim || mIsInnerDismissAnim) {
             return true;
         }

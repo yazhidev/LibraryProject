@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -36,7 +35,7 @@ public abstract class BaseDialog<T extends BaseDialog<T>> extends Dialog {
     protected float mHeightScale;
     private DisplayMetrics mDisplayMetrics;
 
-    public BaseDialog(@NonNull Context context) {
+    public BaseDialog(Context context) {
         super(context);
         setDialogTheme();
         mContext = context;

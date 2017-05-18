@@ -15,9 +15,14 @@ import android.widget.TextView;
 import com.yazhi1992.yazhilib.R;
 import com.yazhi1992.yazhilib.utils.CalcUtil;
 
+import static android.R.attr.enabled;
+import static android.R.attr.state_enabled;
+import static android.R.attr.state_focused;
+import static android.R.attr.state_pressed;
+
 /**
  * Created by zengyazhi on 17/5/17.
- *
+ * <p>
  * 参考、致谢：https://github.com/H07000223/FlycoRoundView
  */
 
@@ -38,12 +43,15 @@ public class RoundViewDelegate {
     private int mStrokeColor;
     private int mStrokeColorPressed;
     private int mTextColorPressed;
+    private int mBackgroundDisableColor;
+    private int mTextDisableColor;
+    private int mStrokeDisableColor;
     /*是否圆角直径即高度*/
     private boolean mIsCircleRound;
-    private boolean mIsRippleEnable;
     private float[] mRadiusArr = new float[8];
     private GradientDrawable mGdBackground = new GradientDrawable();
     private GradientDrawable mGdBackgroundPressed = new GradientDrawable();
+    private GradientDrawable mGdBackgroundDisable = new GradientDrawable();
 
 
     public RoundViewDelegate(View view, Context context, AttributeSet attrs) {
@@ -62,11 +70,13 @@ public class RoundViewDelegate {
         mStrokeColorPressed = ta.getColor(R.styleable.RoundTextView_rv_strokePressColor, Integer.MAX_VALUE);
         mTextColorPressed = ta.getColor(R.styleable.RoundTextView_rv_textPressColor, Integer.MAX_VALUE);
         mIsCircleRound = ta.getBoolean(R.styleable.RoundTextView_rv_isCircleRound, false);
+        mTextDisableColor = ta.getColor(R.styleable.RoundTextView_rv_textDisableColor, Integer.MAX_VALUE);
+        mStrokeDisableColor = ta.getColor(R.styleable.RoundTextView_rv_strokeDisableColor, Integer.MAX_VALUE);
+        mBackgroundDisableColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundDisableColor, Integer.MAX_VALUE);
         mCornerRadius_TL = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_TL, 0);
         mCornerRadius_TR = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_TR, 0);
         mCornerRadius_BL = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_BL, 0);
         mCornerRadius_BR = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_BR, 0);
-        mIsRippleEnable = ta.getBoolean(R.styleable.RoundTextView_rv_isRippleEnable, false);
         ta.recycle();
     }
 
@@ -93,50 +103,38 @@ public class RoundViewDelegate {
     public void setBgSelector() {
         StateListDrawable stateListDrawable = new StateListDrawable();
         setDrawble(mGdBackground, mBackgroundColor, mStrokeColor);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && mIsRippleEnable) {
-            RippleDrawable rippleDrawable = new RippleDrawable(getPressedColorSelector(mBackgroundColor, mBackgroundColorPressed), mGdBackground, null);
-            mView.setBackground(rippleDrawable);
-        } else {
-            stateListDrawable.addState(new int[]{-android.R.attr.state_pressed}, mGdBackground);
-            if (mBackgroundColorPressed != Integer.MAX_VALUE || mStrokeColorPressed != Integer.MAX_VALUE) {
-                setDrawble(mGdBackgroundPressed, mBackgroundColorPressed == Integer.MAX_VALUE ? mBackgroundColor : mBackgroundColorPressed, mStrokeColorPressed == Integer.MAX_VALUE ? mStrokeColor : mStrokeColorPressed);
-                stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, mGdBackgroundPressed);
-            }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {//16
-                mView.setBackground(stateListDrawable);
-            } else {
-                //noinspection deprecation
-                mView.setBackgroundDrawable(stateListDrawable);
-            }
+        //只要有一个状态匹配，背景就会被换掉
+        //点击状态下
+        stateListDrawable.addState(new int[]{-state_pressed, state_enabled}, mGdBackground);
+        if (mBackgroundColorPressed != Integer.MAX_VALUE || mStrokeColorPressed != Integer.MAX_VALUE) {
+            setDrawble(mGdBackgroundPressed, mBackgroundColorPressed == Integer.MAX_VALUE ? mBackgroundColor : mBackgroundColorPressed, mStrokeColorPressed == Integer.MAX_VALUE ? mStrokeColor : mStrokeColorPressed);
+            stateListDrawable.addState(new int[]{state_pressed, state_enabled}, mGdBackgroundPressed);
+        }
+
+        //可用状态下
+        if (mBackgroundDisableColor != Integer.MAX_VALUE || mStrokeDisableColor != Integer.MAX_VALUE) {
+            setDrawble(mGdBackgroundDisable, mBackgroundDisableColor == Integer.MAX_VALUE ? mBackgroundColor : mBackgroundDisableColor, mStrokeDisableColor == Integer.MAX_VALUE ? mStrokeColor : mStrokeDisableColor);
+            stateListDrawable.addState(new int[]{-state_enabled}, mGdBackgroundDisable);
+
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {//16
+            mView.setBackground(stateListDrawable);
+        } else {
+            //noinspection deprecation
+            mView.setBackgroundDrawable(stateListDrawable);
         }
 
         if (mView instanceof TextView) {
             if (mTextColorPressed != Integer.MAX_VALUE) {
                 ColorStateList textColors = ((TextView) mView).getTextColors();
                 ColorStateList colorStateList = new ColorStateList(
-                        new int[][]{new int[]{-android.R.attr.state_pressed}, new int[]{android.R.attr.state_pressed}},
-                        new int[]{textColors.getDefaultColor(), mTextColorPressed});
+                        new int[][]{new int[]{-state_pressed, state_enabled}, new int[]{state_pressed, state_enabled}, new int[]{-state_enabled}},
+                        new int[]{textColors.getDefaultColor(), mTextColorPressed, mTextDisableColor});
                 ((TextView) mView).setTextColor(colorStateList);
             }
         }
-    }
-
-    private ColorStateList getPressedColorSelector(int normalColor, int pressedColor) {
-        return new ColorStateList(
-                new int[][]{
-                        new int[]{android.R.attr.state_pressed},
-                        new int[]{android.R.attr.state_focused},
-                        new int[]{android.R.attr.state_activated},
-                        new int[]{}
-                },
-                new int[]{
-                        pressedColor,
-                        pressedColor,
-                        pressedColor,
-                        normalColor
-                }
-        );
     }
 
     public boolean isCircleRound() {

@@ -2,6 +2,7 @@ package com.yazhi1992.libraryproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.mytv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.e("--", "--");
             }
         });
     }
