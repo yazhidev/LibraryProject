@@ -26,7 +26,6 @@
         app:rv_textPressColor="#ffffff"
         app:rv_backgroundDisableColor="#000000"
         app:rv_backgroundPressColor="#456456"
-        app:rv_backgroundColor="#555555"
         app:rv_strokeWidth="5dp"
         app:rv_strokeDisableColor="#ddd222"
         android:text="123"

@@ -60,6 +60,7 @@ public class RoundViewDelegate {
         init(attrs);
     }
 
+    // TODO: 17/5/22 background 默认属性无效
     private void init(AttributeSet attrs) {
         TypedArray ta = mContext.obtainStyledAttributes(attrs, R.styleable.RoundTextView);
         mBackgroundColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundColor, Color.TRANSPARENT);

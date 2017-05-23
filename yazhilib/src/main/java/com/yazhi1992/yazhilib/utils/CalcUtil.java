@@ -10,7 +10,13 @@ import android.util.TypedValue;
 public class CalcUtil {
 
     public static float dp2px(Context Context, int dp) {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Context.getResources().getDisplayMetrics());
+        final float scale = Context.getResources().getDisplayMetrics().densityDpi;
+        return dp * (scale / 160) + 0.5f;
+    }
+
+    public static float dx2dp(Context Context, int px) {
+        final float scale = Context.getResources().getDisplayMetrics().densityDpi;
+        return (px * 160) / scale + 0.5f;
     }
 
 }

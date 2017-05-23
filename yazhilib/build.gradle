@@ -29,7 +29,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-version = "0.0.4"    //这个是版本号，必须填写
+version = "0.0.5"    //这个是版本号，必须填写
 def siteUrl = 'https://github.com/yazhi1992/LibraryProject' // 项目的主页
 def gitUrl = 'https://github.com/yazhi1992/LibraryProject' // Git仓库的url
 
