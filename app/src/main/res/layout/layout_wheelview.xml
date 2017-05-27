@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#ffffff"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+
+        <com.yazhi1992.yazhilib.widget.RoundView.RoundTextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="取消"
+            android:textSize="15sp"
+            />
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.yazhi1992.yazhilib.widget.RoundView.RoundTextView
+            android:id="@+id/tv_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="确定"
+            android:textSize="15sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp">
+
+        <com.yazhi1992.yazhilib.widget.WheelView.LoopView
+            android:id="@+id/loopView1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/timePickerHeight"
+            android:layout_weight="2"
+            app:lv_textsize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/timePickerHeight"
+            android:gravity="center"
+            android:text="年"
+            />
+
+        <com.yazhi1992.yazhilib.widget.WheelView.LoopView
+            android:id="@+id/loopView2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/timePickerHeight"
+            android:layout_weight="1"
+            app:lv_textsize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/timePickerHeight"
+            android:gravity="center"
+            android:text="月"
+            />
+
+        <com.yazhi1992.yazhilib.widget.WheelView.LoopView
+            android:id="@+id/loopView3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/timePickerHeight"
+            android:layout_weight="3"
+            app:lv_textsize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/timePickerHeight"
+            android:gravity="center"
+            android:text=" "
+            android:textSize="14sp"
+            />
+
+        <com.yazhi1992.yazhilib.widget.WheelView.LoopView
+            android:id="@+id/loopView4"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/timePickerHeight"
+            android:layout_weight="1"
+            app:lv_textsize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/timePickerHeight"
+            android:gravity="center"
+            android:text="时"
+            />
+
+        <com.yazhi1992.yazhilib.widget.WheelView.LoopView
+            android:id="@+id/loopView5"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/timePickerHeight"
+            android:layout_weight="1"
+            app:lv_textsize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/timePickerHeight"
+            android:gravity="center"
+            android:text="分"
+            />
+    </LinearLayout>
+
+</LinearLayout>

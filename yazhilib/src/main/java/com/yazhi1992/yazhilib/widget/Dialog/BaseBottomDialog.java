@@ -16,7 +16,7 @@ public abstract class BaseBottomDialog<T extends BaseBottomDialog<T>> extends Ba
 
     protected Animation mInnerShowAnim;
     protected Animation mInnerDismissAnim;
-    protected long mInnerAnimationDuration = 350;
+    protected long mInnerAnimationDuration = 300;
     protected boolean mIsInnerShowAnim;
     protected boolean mIsInnerDismissAnim;
 

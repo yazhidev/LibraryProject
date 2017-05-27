@@ -33,6 +33,7 @@
     <!-- 圆角弧度,单位dp,BottomRight-->
     <attr name="rv_cornerRadius_BR" format="dimension"/>
 
+    <!--name首字母要大写，否则无法联想-->
     <declare-styleable name="RoundTextView">
         <attr name="rv_backgroundColor"/>
         <attr name="rv_backgroundPressColor"/>
@@ -87,4 +88,25 @@
         <attr name="rv_strokeDisableColor"/>
     </declare-styleable>
 
+    <attr name="lv_textsize" format="dimension"/>
+    <attr name="lv_lineSpace" format="float"/>
+    <attr name="lv_centerTextColor" format="color"/>
+    <attr name="lv_outerTextColor" format="color"/>
+    <attr name="lv_dividerTextColor" format="color"/>
+    <attr name="lv_itemsVisibleCount" format="integer"/>
+    <attr name="lv_isLoop" format="boolean"/>
+    <attr name="lv_initialPosition" format="integer"/>
+    <attr name="lv_scaleX" format="float"/>
+
+    <declare-styleable name="LoopView">
+        <attr name="lv_textsize"/>
+        <attr name="lv_lineSpace"/>
+        <attr name="lv_centerTextColor"/>
+        <attr name="lv_outerTextColor"/>
+        <attr name="lv_dividerTextColor"/>
+        <attr name="lv_itemsVisibleCount"/>
+        <attr name="lv_isLoop"/>
+        <attr name="lv_initialPosition"/>
+        <attr name="lv_scaleX"/>
+    </declare-styleable>
 </resources>

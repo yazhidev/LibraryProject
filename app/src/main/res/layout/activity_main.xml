@@ -7,30 +7,10 @@
     android:layout_height="match_parent"
     tools:context="com.yazhi1992.libraryproject.MainActivity">
 
-
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"/>
-
-    <com.yazhi1992.yazhilib.widget.RoundView.RoundTextView
-        android:id="@+id/mytv"
-        android:layout_width="100dp"
-        android:layout_margin="20dp"
-        android:padding="20dp"
-        android:enabled="false"
-        android:layout_below="@+id/button"
-        app:rv_cornerRadius="5dp"
-        app:rv_isCircleRound="true"
-        app:rv_textPressColor="#ffffff"
-        app:rv_backgroundDisableColor="#000000"
-        app:rv_backgroundPressColor="#456456"
-        app:rv_strokeWidth="5dp"
-        app:rv_strokeDisableColor="#ddd222"
-        android:text="123"
-        app:rv_textDisableColor="#111aaa"
-        android:layout_height="130dp"/>
-
 
 </RelativeLayout>

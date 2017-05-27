@@ -1,34 +1,29 @@
 package com.yazhi1992.libraryproject;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mViewById;
+    private MyBottomDialog mMyBottomDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mMyBottomDialog = new MyBottomDialog(this);
+
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewById.setEnabled(!mViewById.isEnabled());
+                mMyBottomDialog.show();
             }
         });
 
-        mViewById = (TextView) findViewById(R.id.mytv);
-        mViewById.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("--", "--");
-            }
-        });
     }
 }
