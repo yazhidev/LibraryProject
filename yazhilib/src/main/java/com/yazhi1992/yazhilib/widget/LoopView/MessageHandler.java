@@ -2,7 +2,7 @@
 // Jad home page: http://www.geocities.com/kpdus/jad.html
 // Decompiler options: braces fieldsfirst space lnc 
 
-package com.yazhi1992.yazhilib.widget.WheelView;
+package com.yazhi1992.yazhilib.widget.LoopView;
 
 import android.os.Handler;
 import android.os.Message;

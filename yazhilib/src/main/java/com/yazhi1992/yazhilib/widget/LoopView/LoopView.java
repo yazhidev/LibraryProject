@@ -1,4 +1,4 @@
-package com.yazhi1992.yazhilib.widget.WheelView;
+package com.yazhi1992.yazhilib.widget.LoopView;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -12,7 +12,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -21,7 +20,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yazhi1992.yazhilib.R;
-import com.yazhi1992.yazhilib.utils.PhoneUtils;
 
 /**
  * Created by Weidongjian on 2015/8/18.
