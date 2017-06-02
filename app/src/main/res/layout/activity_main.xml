@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yazhi1992.libraryproject.MainActivity">
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"/>
 
     <Button
         android:id="@+id/button"
@@ -13,4 +20,23 @@
         android:layout_height="wrap_content"
         android:text="Button"/>
 
-</RelativeLayout>
+
+    <com.yazhi1992.yazhilib.widget.RoundView.LoadingTextView
+        android:id="@+id/loadingView"
+        android:layout_margin="20dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        app:rv_isCircleRound="true"
+        app:rv_backgroundColor="#eeeeee"
+        app:rv_backgroundPressColor="#dddddd"
+        app:rv_backgroundDisableColor="#ddd000"
+        app:rv_text="adsfadf"
+        app:rv_strokeColor="#123123"
+        app:rv_strokePressColor="#444ddd"
+        app:rv_strokeWidth="2dp"
+        app:rv_textColor="#222ccc"
+        app:rv_textPressColor="#ffffff"
+        app:rv_textDisableColor="#000000"
+        ></com.yazhi1992.yazhilib.widget.RoundView.LoadingTextView>
+
+</LinearLayout>

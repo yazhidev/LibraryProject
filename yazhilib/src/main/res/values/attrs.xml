@@ -32,6 +32,18 @@
     <attr name="rv_cornerRadius_BL" format="dimension"/>
     <!-- 圆角弧度,单位dp,BottomRight-->
     <attr name="rv_cornerRadius_BR" format="dimension"/>
+    <!--TextView文字-->
+    <attr name="rv_text" format="string"/>
+    <!--TextView文字颜色-->
+    <attr name="rv_textColor" format="color"/>
+    <!--TextView文字大小-->
+    <attr name="rv_textSize" format="integer"/>
+    <!--loading 圆直径-->
+    <attr name="rv_circleRadius" format="dimension"/>
+    <!--loading 圆颜色-->
+    <attr name="rv_circleColor" format="color"/>
+    <!--loading 圆宽度-->
+    <attr name="rv_circleWidth" format="dimension"/>
 
     <!--name首字母要大写，否则无法联想-->
     <declare-styleable name="RoundTextView">
@@ -88,6 +100,30 @@
         <attr name="rv_strokeDisableColor"/>
     </declare-styleable>
 
+    <declare-styleable name="LoadingTextView">
+        <attr name="rv_backgroundColor"/>
+        <attr name="rv_backgroundPressColor"/>
+        <attr name="rv_cornerRadius"/>
+        <attr name="rv_strokeWidth"/>
+        <attr name="rv_strokeColor"/>
+        <attr name="rv_strokePressColor"/>
+        <attr name="rv_textPressColor"/>
+        <attr name="rv_isCircleRound"/>
+        <attr name="rv_cornerRadius_TL"/>
+        <attr name="rv_cornerRadius_TR"/>
+        <attr name="rv_cornerRadius_BL"/>
+        <attr name="rv_cornerRadius_BR"/>
+        <attr name="rv_textDisableColor"/>
+        <attr name="rv_backgroundDisableColor"/>
+        <attr name="rv_strokeDisableColor"/>
+        <attr name="rv_text"/>
+        <attr name="rv_textColor"/>
+        <attr name="rv_textSize"/>
+        <attr name="rv_circleRadius"/>
+        <attr name="rv_circleColor"/>
+        <attr name="rv_circleWidth"/>
+    </declare-styleable>
+
     <attr name="lv_textsize" format="dimension"/>
     <attr name="lv_lineSpace" format="float"/>
     <attr name="lv_centerTextColor" format="color"/>
@@ -108,5 +144,18 @@
         <attr name="lv_isLoop"/>
         <attr name="lv_initialPosition"/>
         <attr name="lv_scaleX"/>
+    </declare-styleable>
+
+    <declare-styleable name="ProgressWheel">
+        <attr name="matProg_progressIndeterminate" format="boolean" />
+        <attr name="matProg_barColor" format="color" />
+        <attr name="matProg_rimColor" format="color" />
+        <attr name="matProg_rimWidth" format="dimension" />
+        <attr name="matProg_spinSpeed" format="float" />
+        <attr name="matProg_barSpinCycleTime" format="integer" />
+        <attr name="matProg_circleRadius" format="dimension" />
+        <attr name="matProg_fillRadius" format="boolean" />
+        <attr name="matProg_barWidth" format="dimension" />
+        <attr name="matProg_linearProgress" format="boolean" />
     </declare-styleable>
 </resources>
