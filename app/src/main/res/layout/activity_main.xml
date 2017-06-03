@@ -10,39 +10,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="button"/>
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
             android:text="倒计时"/>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="loading"/>
+
 
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:paddingTop="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <com.yazhi1992.yazhilib.widget.RoundView.LoadingTextView
             android:id="@+id/loadingView"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            app:rv_isCircleRound="true"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            app:rv_cornerRadius="10dp"
             app:rv_backgroundColor="#F26355"
             app:rv_backgroundDisableColor="#dddddd"
             app:rv_backgroundPressColor="#dddddd"

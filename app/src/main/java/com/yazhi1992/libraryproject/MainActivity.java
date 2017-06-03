@@ -23,26 +23,31 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mViewById.startTimer(5);
             }
         });
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mViewById.setLoading(!mViewById.isLoading());
             }
         });
 
         mViewById = (LoadingTextView) findViewById(R.id.loadingView);
+        mViewById.setTextSize(15);
+        mViewById.setTextWhenCountDown("还需要等待", "秒后重获");
         mViewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewById.setLoading(true);
-                mViewById.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mViewById.startTimer(5);
-                    }
-                }, 2000);
+                mViewById.startTimer(5);
+
+//                mViewById.setLoading(true);
+//                mViewById.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mViewById.startTimer(5);
+//                    }
+//                }, 2000);
             }
         });
     }

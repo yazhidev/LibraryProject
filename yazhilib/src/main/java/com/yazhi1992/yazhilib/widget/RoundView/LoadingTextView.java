@@ -4,27 +4,33 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yazhi1992.yazhilib.R;
 import com.yazhi1992.yazhilib.utils.CalcUtil;
+import com.yazhi1992.yazhilib.utils.PhoneUtils;
 import com.yazhi1992.yazhilib.widget.ProgressWheel.ProgressWheel;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static android.R.attr.height;
 import static android.R.attr.state_enabled;
 import static android.R.attr.state_pressed;
+import static android.R.attr.width;
 
 /**
  * Created by zengyazhi on 17/6/1.
- *
+ * <p>
  * 带有倒计时功能、loading加载中、设置圆角/可用/点击颜色的textview
  */
 
@@ -38,6 +44,7 @@ public class LoadingTextView extends RelativeLayout {
     private int mTextColor;
     private int mTextPressColor;
     private int mTextDisableColor;
+    private Paint mTextPaint;
     //loading控件 半径
     private int mCircleRadiu;
     //loading控件 颜色
@@ -45,8 +52,10 @@ public class LoadingTextView extends RelativeLayout {
     //loading控件 宽度
     private int mCircleWidth;
     private Context mContext;
-    private int mSecond = -1; //未开启计时
-    private VideoTimerTask mVideoTimerTask;//计时器
+    //未开启计时
+    private int mSecond = -1;
+    //计时器
+    private VideoTimerTask mVideoTimerTask;
     private Timer mVideoTimer;
     private Handler mHandler;
     //倒计时字样
@@ -95,8 +104,16 @@ public class LoadingTextView extends RelativeLayout {
         mTextView.setTextColor(colorStateList);
         mTextView.setGravity(Gravity.CENTER);
         mTextView.setDuplicateParentStateEnabled(true);
-        mTextView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        //只显示当行
+        mTextView.setSingleLine(true);
+        LayoutParams layoutParams1 = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams1.addRule(CENTER_IN_PARENT);
+        mTextView.setLayoutParams(layoutParams1);
         addView(mTextView);
+
+        mTextPaint = new Paint();
+        mTextPaint.setAntiAlias(true);
+        mTextPaint.setTextSize(mTextSize);
 
         //添加加载控件
         mProgressWheel = new ProgressWheel(mContext);
@@ -107,6 +124,64 @@ public class LoadingTextView extends RelativeLayout {
         mProgressWheel.setCircleRadius(mCircleRadiu);
         mProgressWheel.setBarColor(mCircleColor);
         addView(mProgressWheel);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        //文字  radiu*2  padding
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        // 计算出所有的childView的宽和高
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
+
+        int childCount = getChildCount();
+        int computeWidth = 0;
+        int computeHeight = 0;
+
+        for (int i = 0; i < childCount; i++) {
+            View childAt = getChildAt(i);
+            int measuredWidth = childAt.getMeasuredWidth();
+            int measuredHeight = childAt.getMeasuredHeight();
+            computeWidth = Math.max(computeWidth, measuredWidth);
+            computeHeight = Math.max(computeHeight, measuredHeight);
+        }
+
+        computeWidth += (getPaddingLeft() + getPaddingRight());
+        switch (widthMode) {
+            case MeasureSpec.AT_MOST:
+                //wrap_content
+                //不超过父控件范围
+                widthSize = computeWidth > widthSize ? widthSize : computeWidth;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                //自由发挥
+                widthSize = computeWidth;
+                break;
+            case MeasureSpec.EXACTLY:
+                break;
+            default:
+                break;
+        }
+
+        computeHeight += (getPaddingTop() + getPaddingBottom());
+        switch (heightMode) {
+            case MeasureSpec.AT_MOST:
+                heightSize = computeHeight > heightSize ? heightSize : computeHeight;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                heightSize = computeHeight;
+                break;
+            case MeasureSpec.EXACTLY:
+                break;
+            default:
+                break;
+        }
+
+        setMeasuredDimension(widthSize, heightSize);
     }
 
     @Override
@@ -125,19 +200,20 @@ public class LoadingTextView extends RelativeLayout {
      * @param loading true加载/false停止加载
      */
     public void setLoading(boolean loading) {
-        if (mProgressWheel == null || loading == mProgressWheel.isSpinning()) return;
+        if (mProgressWheel == null || loading == mProgressWheel.isSpinning() || mSecond != -1) return;
         if (loading) {
             //开始选旋转
-            mTextView.setText("");
+            mTextView.setVisibility(View.INVISIBLE);
             mProgressWheel.spin();
         } else {
+            mTextView.setVisibility(View.VISIBLE);
             mProgressWheel.stopSpinning();
-            mTextView.setText(mNormalText);
         }
     }
 
     /**
      * 设置显示文字
+     *
      * @param str
      */
     public void setText(String str) {
@@ -146,6 +222,16 @@ public class LoadingTextView extends RelativeLayout {
             mTextView.setText(str);
         }
     }
+
+    /**
+     * 单位sp
+     *
+     * @param size
+     */
+    public void setTextSize(float size) {
+        mTextView.setTextSize(size);
+    }
+
 
     /**
      * 是否正在加载
@@ -207,7 +293,7 @@ public class LoadingTextView extends RelativeLayout {
                             break;
                         case END_TIMER_TASK:
                             mTextView.setText(mNormalText);
-                            setEnabled(true);
+                            stopTime();
                             break;
                         default:
                             break;

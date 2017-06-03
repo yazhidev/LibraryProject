@@ -21,16 +21,7 @@ public class MyBottomDialog extends BaseBottomDialog<MyBottomDialog> {
 
     @Override
     public View onCreateView() {
-        MyTimePicker timePicker = new MyTimePicker(mContext);
-//        SinglePicker singlePicker = new SinglePicker(mContext);
-//        List<String> data = new ArrayList<>();
-//        data.add("121");
-//        data.add("121");
-//        data.add("121");
-//        data.add("121");
-//        data.add("121");
-//        singlePicker.setData(data);
-        return timePicker.getContenView();
+        return null;
     }
 
     @Override
