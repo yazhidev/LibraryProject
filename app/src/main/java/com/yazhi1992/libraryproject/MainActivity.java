@@ -23,13 +23,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewById.startTimer(5);
             }
         });
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewById.setLoading(false);
+
             }
         });
 
@@ -37,7 +36,13 @@ public class MainActivity extends AppCompatActivity {
         mViewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mViewById.setLoading(true);
+                mViewById.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewById.startTimer(5);
+                    }
+                }, 2000);
             }
         });
     }

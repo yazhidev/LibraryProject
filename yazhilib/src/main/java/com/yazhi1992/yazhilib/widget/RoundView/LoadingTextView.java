@@ -194,8 +194,8 @@ public class LoadingTextView extends RelativeLayout {
      */
     public void startTimer(int time) {
         stopTime();
-        mTextView.setText(mTimeText1 + time + mTimeText2);
         setLoading(false);
+        mTextView.setText(mTimeText1 + time + mTimeText2);
         setEnabled(false);
         if (mHandler == null) {
             mHandler = new Handler(new Handler.Callback() {
