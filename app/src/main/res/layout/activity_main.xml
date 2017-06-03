@@ -27,6 +27,13 @@
             android:layout_weight="1"
             android:text="loading"/>
 
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="可用状态"/>
+
 
     </LinearLayout>
 
@@ -34,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <com.yazhi1992.yazhilib.widget.RoundView.LoadingTextView
+        <com.yazhi1992.yazhilib.widget.RoundView.RoundLoadingView
             android:id="@+id/loadingView"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -53,8 +60,23 @@
             app:rv_textColor="#ffffff"
             app:rv_textDisableColor="#ffffff"
             app:rv_textPressColor="#ffc2c2"
-            ></com.yazhi1992.yazhilib.widget.RoundView.LoadingTextView>
+            app:rv_enable="false"
+            ></com.yazhi1992.yazhilib.widget.RoundView.RoundLoadingView>
 
     </RelativeLayout>
+
+    <com.yazhi1992.yazhilib.widget.RoundView.RoundRelativeLayout
+        android:id="@+id/myrela"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        app:rv_cornerRadius="10dp"
+        app:rv_backgroundColor="#F26355"
+        app:rv_backgroundDisableColor="#dddddd"
+        app:rv_backgroundPressColor="#dddddd"
+        app:rv_strokeColor="#F26355"
+        app:rv_strokePressColor="#F26355"
+        app:rv_strokeDisableColor="#dddddd"
+        app:rv_strokeWidth="2dp"
+        ></com.yazhi1992.yazhilib.widget.RoundView.RoundRelativeLayout>
 
 </LinearLayout>

@@ -33,4 +33,8 @@ public class RoundRelativeLayout extends RelativeLayout {
             mDelegate.setBgSelector();
         }
     }
+
+    public RoundViewDelegate getDelegate() {
+        return mDelegate;
+    }
 }

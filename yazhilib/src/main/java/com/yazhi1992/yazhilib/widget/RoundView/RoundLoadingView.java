@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,16 +16,13 @@ import android.widget.TextView;
 
 import com.yazhi1992.yazhilib.R;
 import com.yazhi1992.yazhilib.utils.CalcUtil;
-import com.yazhi1992.yazhilib.utils.PhoneUtils;
 import com.yazhi1992.yazhilib.widget.ProgressWheel.ProgressWheel;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static android.R.attr.height;
 import static android.R.attr.state_enabled;
 import static android.R.attr.state_pressed;
-import static android.R.attr.width;
 
 /**
  * Created by zengyazhi on 17/6/1.
@@ -34,13 +30,13 @@ import static android.R.attr.width;
  * 带有倒计时功能、loading加载中、设置圆角/可用/点击颜色的textview
  */
 
-public class LoadingTextView extends RelativeLayout {
+public class RoundLoadingView extends RelativeLayout {
     private RoundViewDelegate mDelegate;
-    protected TextView mTextView;
-    protected ProgressWheel mProgressWheel;
+    private TextView mTextView;
+    private ProgressWheel mProgressWheel;
     //显示的文字
     private String mNormalText;
-    private int mTextSize;
+    private float mTextSize;
     private int mTextColor;
     private int mTextPressColor;
     private int mTextDisableColor;
@@ -61,36 +57,67 @@ public class LoadingTextView extends RelativeLayout {
     //倒计时字样
     private String mTimeText1 = "";
     private String mTimeText2 = " 秒后重获";
+    //默认的是否可用状态
+    private boolean mEnable;
 
-    public LoadingTextView(Context context) {
+    public RoundLoadingView(Context context) {
         this(context, null);
     }
 
-    public LoadingTextView(Context context, AttributeSet attrs) {
+    public RoundLoadingView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public LoadingTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public int getCircleRadiu() {
+        return mCircleRadiu;
+    }
+
+    public void setCircleRadiu(int circleRadiu) {
+        mCircleRadiu = circleRadiu;
+        mProgressWheel.setCircleRadius(mCircleRadiu);
+    }
+
+    public int getCircleColor() {
+        return mCircleColor;
+    }
+
+    public void setCircleColor(int circleColor) {
+        mCircleColor = circleColor;
+        mProgressWheel.setBarColor(mCircleColor);
+    }
+
+    public int getCircleWidth() {
+        return mCircleWidth;
+    }
+
+    public void setCircleWidth(int circleWidth) {
+        mCircleWidth = circleWidth;
+        mProgressWheel.setBarWidth(mCircleWidth);
+    }
+
+    public RoundLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         mDelegate = new RoundViewDelegate(this, context, attrs);
 
         TypedArray typedArray = null;
         try {
-            typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoadingTextView, 0, defStyleAttr);
-            mNormalText = typedArray.getString(R.styleable.LoadingTextView_rv_text);
-            mTextColor = typedArray.getColor(R.styleable.LoadingTextView_rv_textColor, Color.parseColor("#333333"));
-            mTextSize = typedArray.getInteger(R.styleable.LoadingTextView_rv_textSize, 15);
-            mTextPressColor = typedArray.getColor(R.styleable.LoadingTextView_rv_textPressColor, Color.parseColor("#333333"));
-            mTextDisableColor = typedArray.getColor(R.styleable.LoadingTextView_rv_textDisableColor, Color.parseColor("#333333"));
-            mCircleColor = typedArray.getColor(R.styleable.LoadingTextView_rv_circleColor, Color.parseColor("#ffffff"));
-            mCircleWidth = typedArray.getDimensionPixelSize(R.styleable.LoadingTextView_rv_circleWidth, (int) CalcUtil.dp2px(context, 2));
-            mCircleRadiu = typedArray.getDimensionPixelSize(R.styleable.LoadingTextView_rv_circleRadius, (int) CalcUtil.dp2px(context, 16));
+            typedArray = context.obtainStyledAttributes(attrs, R.styleable.RoundLoadingView, 0, defStyleAttr);
+            mNormalText = typedArray.getString(R.styleable.RoundLoadingView_rv_text);
+            mTextColor = typedArray.getColor(R.styleable.RoundLoadingView_rv_textColor, Color.parseColor("#333333"));
+            mTextSize = typedArray.getInteger(R.styleable.RoundLoadingView_rv_textSize, 15);
+            mTextPressColor = typedArray.getColor(R.styleable.RoundLoadingView_rv_textPressColor, Color.parseColor("#333333"));
+            mTextDisableColor = typedArray.getColor(R.styleable.RoundLoadingView_rv_textDisableColor, Color.parseColor("#333333"));
+            mCircleColor = typedArray.getColor(R.styleable.RoundLoadingView_rv_circleColor, Color.parseColor("#ffffff"));
+            mCircleWidth = typedArray.getDimensionPixelSize(R.styleable.RoundLoadingView_rv_circleWidth, (int) CalcUtil.dp2px(context, 2));
+            mCircleRadiu = typedArray.getDimensionPixelSize(R.styleable.RoundLoadingView_rv_circleRadius, (int) CalcUtil.dp2px(context, 16));
+            mEnable = typedArray.getBoolean(R.styleable.RoundLoadingView_rv_enable, true);
         } finally {
             if (typedArray != null) {
                 typedArray.recycle();
             }
         }
+
 
         //添加textview
         mTextView = new TextView(context);
@@ -117,6 +144,7 @@ public class LoadingTextView extends RelativeLayout {
 
         //添加加载控件
         mProgressWheel = new ProgressWheel(mContext);
+        mProgressWheel.setVisibility(View.INVISIBLE);
         LayoutParams layoutParams = new LayoutParams(2 * mCircleRadiu, 2 * mCircleRadiu);
         layoutParams.addRule(CENTER_IN_PARENT);
         mProgressWheel.setLayoutParams(layoutParams);
@@ -124,6 +152,10 @@ public class LoadingTextView extends RelativeLayout {
         mProgressWheel.setCircleRadius(mCircleRadiu);
         mProgressWheel.setBarColor(mCircleColor);
         addView(mProgressWheel);
+
+        if(!mEnable) {
+            setEnabled(false);
+        }
     }
 
     @Override
@@ -200,13 +232,15 @@ public class LoadingTextView extends RelativeLayout {
      * @param loading true加载/false停止加载
      */
     public void setLoading(boolean loading) {
-        if (mProgressWheel == null || loading == mProgressWheel.isSpinning() || mSecond != -1) return;
+        if (mProgressWheel == null || loading == mProgressWheel.isSpinning() || mSecond != -1 || !isEnabled()) return;
         if (loading) {
             //开始选旋转
             mTextView.setVisibility(View.INVISIBLE);
+            mProgressWheel.setVisibility(View.VISIBLE);
             mProgressWheel.spin();
         } else {
             mTextView.setVisibility(View.VISIBLE);
+            mProgressWheel.setVisibility(View.INVISIBLE);
             mProgressWheel.stopSpinning();
         }
     }
@@ -229,9 +263,47 @@ public class LoadingTextView extends RelativeLayout {
      * @param size
      */
     public void setTextSize(float size) {
+        mTextSize = size;
         mTextView.setTextSize(size);
     }
 
+    private void setTextColor() {
+        ColorStateList colorStateList = new ColorStateList(
+                new int[][]{new int[]{-state_pressed, state_enabled}, new int[]{state_pressed, state_enabled}, new int[]{-state_enabled}},
+                new int[]{mTextColor, mTextPressColor, mTextDisableColor});
+        mTextView.setTextColor(colorStateList);
+    }
+
+    public float getTextSize() {
+        return mTextSize;
+    }
+
+    public int getTextPressColor() {
+        return mTextPressColor;
+    }
+
+    public void setTextPressColor(int textPressColor) {
+        mTextPressColor = textPressColor;
+        setTextColor();
+    }
+
+    public int getTextDisableColor() {
+        return mTextDisableColor;
+    }
+
+    public void setTextDisableColor(int textDisableColor) {
+        mTextDisableColor = textDisableColor;
+        setTextColor();
+    }
+
+    public int getTextColor() {
+        return mTextColor;
+    }
+
+    public void setTextColor(int color) {
+        mTextColor = color;
+        setTextColor();
+    }
 
     /**
      * 是否正在加载
@@ -279,6 +351,7 @@ public class LoadingTextView extends RelativeLayout {
      * @param time 倒计时时间
      */
     public void startTimer(int time) {
+        if (!isEnabled()) return;
         stopTime();
         setLoading(false);
         mTextView.setText(mTimeText1 + time + mTimeText2);
@@ -356,5 +429,9 @@ public class LoadingTextView extends RelativeLayout {
             //加载时屏蔽点击事件
             return true;
         }
+    }
+
+    public RoundViewDelegate getDelegate() {
+        return mDelegate;
     }
 }

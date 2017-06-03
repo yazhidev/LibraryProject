@@ -33,4 +33,8 @@ public class RoundTextView extends TextView {
             mDelegate.setBgSelector();
         }
     }
+
+    public RoundViewDelegate getDelegate() {
+        return mDelegate;
+    }
 }

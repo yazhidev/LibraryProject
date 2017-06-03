@@ -44,6 +44,8 @@
     <attr name="rv_circleColor" format="color"/>
     <!--loading 圆宽度-->
     <attr name="rv_circleWidth" format="dimension"/>
+    <!--loadingView 默认是否可用状态-->
+    <attr name="rv_enable" format="boolean"/>
 
     <!--name首字母要大写，否则无法联想-->
     <declare-styleable name="RoundTextView">
@@ -100,7 +102,7 @@
         <attr name="rv_strokeDisableColor"/>
     </declare-styleable>
 
-    <declare-styleable name="LoadingTextView">
+    <declare-styleable name="RoundLoadingView">
         <attr name="rv_backgroundColor"/>
         <attr name="rv_backgroundPressColor"/>
         <attr name="rv_cornerRadius"/>
@@ -122,6 +124,7 @@
         <attr name="rv_circleRadius"/>
         <attr name="rv_circleColor"/>
         <attr name="rv_circleWidth"/>
+        <attr name="rv_enable"/>
     </declare-styleable>
 
     <attr name="lv_textsize" format="dimension"/>

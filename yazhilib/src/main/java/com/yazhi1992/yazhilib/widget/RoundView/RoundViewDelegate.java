@@ -63,17 +63,17 @@ public class RoundViewDelegate {
     // TODO: 17/5/22 background 默认属性无效
     private void init(AttributeSet attrs) {
         TypedArray ta = mContext.obtainStyledAttributes(attrs, R.styleable.RoundTextView);
+        mCornerRadius = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius, 0);
+        mIsCircleRound = ta.getBoolean(R.styleable.RoundTextView_rv_isCircleRound, false);
         mBackgroundColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundColor, Color.TRANSPARENT);
         mBackgroundColorPressed = ta.getColor(R.styleable.RoundTextView_rv_backgroundPressColor, Integer.MAX_VALUE);
-        mCornerRadius = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius, 0);
+        mBackgroundDisableColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundDisableColor, Integer.MAX_VALUE);
         mStrokeWidth = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_strokeWidth, 0);
         mStrokeColor = ta.getColor(R.styleable.RoundTextView_rv_strokeColor, Color.TRANSPARENT);
         mStrokeColorPressed = ta.getColor(R.styleable.RoundTextView_rv_strokePressColor, Integer.MAX_VALUE);
-        mTextColorPressed = ta.getColor(R.styleable.RoundTextView_rv_textPressColor, Integer.MAX_VALUE);
-        mIsCircleRound = ta.getBoolean(R.styleable.RoundTextView_rv_isCircleRound, false);
-        mTextDisableColor = ta.getColor(R.styleable.RoundTextView_rv_textDisableColor, Integer.MAX_VALUE);
         mStrokeDisableColor = ta.getColor(R.styleable.RoundTextView_rv_strokeDisableColor, Integer.MAX_VALUE);
-        mBackgroundDisableColor = ta.getColor(R.styleable.RoundTextView_rv_backgroundDisableColor, Integer.MAX_VALUE);
+        mTextColorPressed = ta.getColor(R.styleable.RoundTextView_rv_textPressColor, Integer.MAX_VALUE);
+        mTextDisableColor = ta.getColor(R.styleable.RoundTextView_rv_textDisableColor, Integer.MAX_VALUE);
         mCornerRadius_TL = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_TL, 0);
         mCornerRadius_TR = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_TR, 0);
         mCornerRadius_BL = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_BL, 0);
@@ -144,6 +144,132 @@ public class RoundViewDelegate {
 
     public void setCornerRadius(int cornerRadius) {
         mCornerRadius = (int) CalcUtil.dp2px(mContext, cornerRadius);
+        setBgSelector();
+    }
+
+    public int getStrokeWidth() {
+        return mStrokeWidth;
+    }
+
+    public void setStrokeWidth(int strokeWidth) {
+        mStrokeWidth = strokeWidth;
+        setBgSelector();
+    }
+
+    public int getCornerRadius() {
+        return mCornerRadius;
+    }
+
+    public int getCornerRadius_TL() {
+        return mCornerRadius_TL;
+    }
+
+    public void setCornerRadius_TL(int cornerRadius_TL) {
+        mCornerRadius_TL = cornerRadius_TL;
+        setBgSelector();
+    }
+
+    public int getCornerRadius_TR() {
+        return mCornerRadius_TR;
+    }
+
+    public void setCornerRadius_TR(int cornerRadius_TR) {
+        mCornerRadius_TR = cornerRadius_TR;
+        setBgSelector();
+    }
+
+    public int getCornerRadius_BL() {
+        return mCornerRadius_BL;
+    }
+
+    public void setCornerRadius_BL(int cornerRadius_BL) {
+        mCornerRadius_BL = cornerRadius_BL;
+        setBgSelector();
+    }
+
+    public int getCornerRadius_BR() {
+        return mCornerRadius_BR;
+    }
+
+    public void setCornerRadius_BR(int cornerRadius_BR) {
+        mCornerRadius_BR = cornerRadius_BR;
+        setBgSelector();
+    }
+
+    public int getBackgroundColor() {
+        return mBackgroundColor;
+    }
+
+    public void setBackgroundColor(int backgroundColor) {
+        mBackgroundColor = backgroundColor;
+        setBgSelector();
+    }
+
+    public int getBackgroundColorPressed() {
+        return mBackgroundColorPressed;
+    }
+
+    public void setBackgroundColorPressed(int backgroundColorPressed) {
+        mBackgroundColorPressed = backgroundColorPressed;
+        setBgSelector();
+    }
+
+    public int getStrokeColor() {
+        return mStrokeColor;
+    }
+
+    public void setStrokeColor(int strokeColor) {
+        mStrokeColor = strokeColor;
+        setBgSelector();
+    }
+
+    public int getStrokeColorPressed() {
+        return mStrokeColorPressed;
+    }
+
+    public void setStrokeColorPressed(int strokeColorPressed) {
+        mStrokeColorPressed = strokeColorPressed;
+        setBgSelector();
+    }
+
+    public int getTextColorPressed() {
+        return mTextColorPressed;
+    }
+
+    public void setTextColorPressed(int textColorPressed) {
+        mTextColorPressed = textColorPressed;
+        setBgSelector();
+    }
+
+    public int getBackgroundDisableColor() {
+        return mBackgroundDisableColor;
+    }
+
+    public void setBackgroundDisableColor(int backgroundDisableColor) {
+        mBackgroundDisableColor = backgroundDisableColor;
+        setBgSelector();
+    }
+
+    public int getTextDisableColor() {
+        return mTextDisableColor;
+    }
+
+    public void setTextDisableColor(int textDisableColor) {
+        mTextDisableColor = textDisableColor;
+        setBgSelector();
+    }
+
+    public int getStrokeDisableColor() {
+        return mStrokeDisableColor;
+    }
+
+    public void setStrokeDisableColor(int strokeDisableColor) {
+        mStrokeDisableColor = strokeDisableColor;
+        setBgSelector();
+    }
+
+    public void setCircleRound(boolean circleRound) {
+        mIsCircleRound = circleRound;
         setBgSelector();
     }
 }

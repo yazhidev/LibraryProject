@@ -9,9 +9,9 @@
 
 ### 0.0.7 
 
-- 增加 LoadingTextView ，在 RoundRelativelayout 的基础上添加了 loading 状态和倒计时状态
+- 增加 RoundLoadingView ，在 RoundRelativelayout 的基础上添加了 loading 状态和倒计时状态
 
-![LoadingTextView](http://upload-images.jianshu.io/upload_images/1929170-276c9468a8c79928.gif?imageMogr2/auto-orient/strip)
+![RoundLoadingView](http://upload-images.jianshu.io/upload_images/1929170-276c9468a8c79928.gif?imageMogr2/auto-orient/strip)
 
 - 修复 RoundViewDelegate 中 mCornerRadius_BR 和 mCornerRadius_BL 颠倒的问题
 

@@ -1,17 +1,19 @@
 package com.yazhi1992.libraryproject;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
-import com.yazhi1992.yazhilib.widget.RoundView.LoadingTextView;
+import com.yazhi1992.yazhilib.widget.RoundView.RoundLoadingView;
+import com.yazhi1992.yazhilib.widget.RoundView.RoundRelativeLayout;
+import com.yazhi1992.yazhilib.widget.RoundView.RoundViewDelegate;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private MyBottomDialog mMyBottomDialog;
-    private LoadingTextView mViewById;
+    private RoundLoadingView mViewById;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mMyBottomDialog = new MyBottomDialog(this);
+
+        RoundRelativeLayout myRela = (RoundRelativeLayout) findViewById(R.id.myrela);
+        RoundViewDelegate delegate = myRela.getDelegate();
+        delegate.setBackgroundColor(Color.BLACK);
 
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,22 +38,29 @@ public class MainActivity extends AppCompatActivity {
                 mViewById.setLoading(!mViewById.isLoading());
             }
         });
+        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewById.setEnabled(!mViewById.isEnabled());
+            }
+        });
 
-        mViewById = (LoadingTextView) findViewById(R.id.loadingView);
+        mViewById = (RoundLoadingView) findViewById(R.id.loadingView);
         mViewById.setTextSize(15);
+        mViewById.setTextColor(Color.GREEN);
+        mViewById.getDelegate().setBackgroundColor(Color.BLUE);
+        mViewById.getDelegate().setBackgroundColorPressed(Color.RED);
         mViewById.setTextWhenCountDown("还需要等待", "秒后重获");
         mViewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewById.startTimer(5);
-
-//                mViewById.setLoading(true);
-//                mViewById.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mViewById.startTimer(5);
-//                    }
-//                }, 2000);
+                mViewById.setLoading(true);
+                mViewById.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewById.startTimer(5);
+                    }
+                }, 2000);
             }
         });
     }

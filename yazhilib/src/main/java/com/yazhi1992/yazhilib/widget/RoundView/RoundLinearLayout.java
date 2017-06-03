@@ -34,4 +34,8 @@ public class RoundLinearLayout extends LinearLayout {
             mDelegate.setBgSelector();
         }
     }
+
+    public RoundViewDelegate getDelegate() {
+        return mDelegate;
+    }
 }
