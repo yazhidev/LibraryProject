@@ -89,10 +89,10 @@ public class RoundViewDelegate {
             mRadiusArr[1] = mCornerRadius_TL;
             mRadiusArr[2] = mCornerRadius_TR;
             mRadiusArr[3] = mCornerRadius_TR;
-            mRadiusArr[4] = mCornerRadius_BL;
-            mRadiusArr[5] = mCornerRadius_BL;
-            mRadiusArr[6] = mCornerRadius_BR;
-            mRadiusArr[7] = mCornerRadius_BR;
+            mRadiusArr[4] = mCornerRadius_BR;
+            mRadiusArr[5] = mCornerRadius_BR;
+            mRadiusArr[6] = mCornerRadius_BL;
+            mRadiusArr[7] = mCornerRadius_BL;
             gd.setCornerRadii(mRadiusArr);
         } else {
             gd.setCornerRadius(mCornerRadius);
