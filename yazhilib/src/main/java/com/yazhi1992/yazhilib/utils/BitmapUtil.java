@@ -51,7 +51,8 @@ public class BitmapUtil {
      * @return
      * @throws IOException
      */
-    public static void saveBitmap(Bitmap bitmap, String path) throws IOException {
+    public static String saveBitmap(Bitmap bitmap, String path) throws IOException {
+        String result = null;
         File file = new File(path);
         if (file.exists()) {
             file.delete();
@@ -63,26 +64,15 @@ public class BitmapUtil {
                 out.flush();
                 out.close();
             }
+            result = path;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            result = null;
         } catch (IOException e) {
             e.printStackTrace();
+            result = null;
         }
-    }
-
-    /**
-     * 获得保存图片的地址
-     *
-     * @return
-     */
-    public static String getSavePicDir() {
-        String path = Environment.getExternalStorageDirectory() + "/MyPic";
-        File localFile = new File(path);
-        if (!localFile.exists()) {
-            //如果没有则创建文件夹
-            localFile.mkdirs();
-        }
-        return path;
+        return result;
     }
 
     /**
