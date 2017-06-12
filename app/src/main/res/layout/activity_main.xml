@@ -3,16 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/outView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/outView"
+    android:paddingBottom="30dp"
     tools:context="com.yazhi1992.libraryproject.MainActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></android.support.v4.view.ViewPager>
+
+    <com.yazhi1992.yazhilib.widget.ViewPagerIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/button"
@@ -45,13 +58,15 @@
         <com.yazhi1992.yazhilib.widget.RoundView.RoundLoadingView
             android:id="@+id/loadingView"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            app:rv_backgroundColor="#F26355"
+            android:visibility="gone"
+            app:rv_backgroundColor="#ffffff"
             app:rv_backgroundDisableColor="#dddddd"
             app:rv_backgroundPressColor="#dddddd"
+            app:rv_circleRadius="100dp"
             app:rv_cornerRadius="10dp"
             app:rv_enable="false"
             app:rv_strokeColor="#F26355"
@@ -59,17 +74,27 @@
             app:rv_strokePressColor="#F26355"
             app:rv_strokeWidth="2dp"
             app:rv_text="获取验证码"
-            app:rv_textColor="#ffffff"
+            app:rv_textColor="#dddddd"
             app:rv_textDisableColor="#ffffff"
             app:rv_textPressColor="#ffc2c2"
+            app:rv_textSize="15"
             ></com.yazhi1992.yazhilib.widget.RoundView.RoundLoadingView>
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取验证码"
+        android:textSize="18sp"
+        android:visibility="gone"
+        />
 
     <com.yazhi1992.yazhilib.widget.RoundView.RoundRelativeLayout
         android:id="@+id/myrela"
         android:layout_width="100dp"
         android:layout_height="50dp"
+        android:visibility="gone"
         app:rv_backgroundColor="#F26355"
         app:rv_backgroundDisableColor="#dddddd"
         app:rv_backgroundPressColor="#dddddd"
@@ -81,9 +106,9 @@
         ></com.yazhi1992.yazhilib.widget.RoundView.RoundRelativeLayout>
 
     <RelativeLayout
-
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <com.yazhi1992.yazhilib.widget.AutoEditText
             android:id="@+id/et"

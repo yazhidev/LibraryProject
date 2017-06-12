@@ -21,6 +21,8 @@ import android.view.View;
 
 import com.yazhi1992.yazhilib.R;
 
+import static android.R.attr.bottom;
+
 /**
  * Created by Weidongjian on 2015/8/18.
  * <p>
@@ -213,7 +215,7 @@ public class LoopView extends View {
     }
 
     private void remeasure() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             return;
         }
 
@@ -368,11 +370,13 @@ public class LoopView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (items == null) {
+        //fix java.lang.ArithmeticException divide by zero
+        if (items == null || items.isEmpty()) {
             return;
         }
 
         change = (int) (totalScrollY / (lineSpacingMultiplier * maxTextHeight));
+
         preCurrentIndex = initPosition + change % items.size();
 
         if (!isLoop) {
@@ -534,7 +538,6 @@ public class LoopView extends View {
             default:
                 if (!eventConsumed) {
                     float y = event.getY();
-                    Log.e("-", event.getRawY() + "--" + beginY);
                     if (event.getRawY() == beginY) {
                         break;
                     }
