@@ -16,6 +16,9 @@ import java.io.File;
 
 public class PhoneUtils {
 
+    private PhoneUtils() {
+    }
+
     /**
      * 是否为平板
      *

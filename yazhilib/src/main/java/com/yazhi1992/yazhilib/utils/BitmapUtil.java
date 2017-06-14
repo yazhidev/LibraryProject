@@ -18,6 +18,9 @@ import java.io.IOException;
 
 public class BitmapUtil {
 
+    private BitmapUtil() {
+    }
+
     /**
      * 根据drawble文件名得到bitmap
      *

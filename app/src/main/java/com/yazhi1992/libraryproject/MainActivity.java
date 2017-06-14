@@ -9,9 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 
+import com.yazhi1992.yazhilib.anim.ScaleTransformer;
+import com.yazhi1992.yazhilib.utils.CalcUtil;
 import com.yazhi1992.yazhilib.widget.AutoEditText;
 import com.yazhi1992.yazhilib.widget.RoundView.RoundLoadingView;
 import com.yazhi1992.yazhilib.widget.RoundView.RoundRelativeLayout;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private RoundLoadingView mViewById;
     private ViewPager mVp;
     private ViewPagerIndicator mIndicator;
+    private int mPosition;
 
     class MyViewPagerAdapter extends FragmentPagerAdapter {
 
@@ -47,12 +49,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mPosition = 1;
+
         mViewById = (RoundLoadingView) findViewById(R.id.loadingView);
         mVp = (ViewPager) findViewById(R.id.vp);
         mVp.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
-        int i = Integer.MAX_VALUE / 2;
-        mVp.setCurrentItem(i - (i % 5));
+        int count = Integer.MAX_VALUE / 2;
+        mVp.setCurrentItem(count - (count % 5));
+        mVp.setPageMargin((int) CalcUtil.dp2px(this, 10));
         mIndicator = (ViewPagerIndicator) findViewById(R.id.indicator);
+        mVp.setOffscreenPageLimit(3);
+        mVp.setPageTransformer(true, new ScaleTransformer());
         mIndicator.setTotalPages(5);
         mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -70,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
         mMyBottomDialog = new MyBottomDialog(this);
         View viewById1 = findViewById(R.id.outView);
@@ -112,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewById.startTimer(5);
+//                mViewById.startTimer(5);
             }
         });
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {

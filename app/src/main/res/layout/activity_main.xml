@@ -8,24 +8,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="30dp"
+    android:clipChildren="false"
     tools:context="com.yazhi1992.libraryproject.MainActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"></android.support.v4.view.ViewPager>
+        android:layout_height="170dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:clipChildren="false"></android.support.v4.view.ViewPager>
 
     <com.yazhi1992.yazhilib.widget.ViewPagerIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_height="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button"

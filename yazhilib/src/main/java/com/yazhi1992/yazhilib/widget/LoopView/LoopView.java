@@ -459,12 +459,10 @@ public class LoopView extends View {
                 } else if (translateY >= firstLineY && maxTextHeight + translateY <= secondLineY) {
                     // center item
                     // 调整选中状态的item文字高度
-                    maxTextHeight -= mAdjustHeight;
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
                     canvas.drawText(drawingStrings[i], getTextX(drawingStrings[i], paintCenterText, tempRect),
                             maxTextHeight, paintCenterText);
                     selectedItem = items.indexOf(drawingStrings[i]);
-                    maxTextHeight += mAdjustHeight;
                 } else {
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
                     canvas.drawText(drawingStrings[i], getTextX(drawingStrings[i], paintOuterText, tempRect),
@@ -475,9 +473,6 @@ public class LoopView extends View {
             i++;
         }
     }
-
-    //手机端选中item文字偏下
-    private int mAdjustHeight = 0;
 
     // text start drawing position
     private int getTextX(String a, Paint paint, Rect rect) {
