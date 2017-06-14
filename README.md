@@ -4,17 +4,28 @@
 
 ### 0.0.3
 
-- 增加可自定义圆角的 TextView (参考[FlycoRoundView](https://github.com/H07000223/FlycoRoundView))
-- 增加 BitmapUtil、CalcUtil
+- 新增可自定义圆角的 TextView (参考[FlycoRoundView](https://github.com/H07000223/FlycoRoundView))
+- 新增 BitmapUtil、CalcUtil
 
 ### 0.0.7 
 
-- 增加 RoundLoadingView ，在 RoundRelativelayout 的基础上添加了 loading 状态和倒计时状态
+- 新增 RoundLoadingView ，在 RoundRelativelayout 的基础上添加了 loading 状态和倒计时状态
 
 ![RoundLoadingView](http://upload-images.jianshu.io/upload_images/1929170-276c9468a8c79928.gif?imageMogr2/auto-orient/strip)
 
 - 修复 RoundViewDelegate 中 mCornerRadius_BR 和 mCornerRadius_BL 颠倒的问题
 
+### 0.0.10
+
+- 新增新闻轮播控件 AutoLoopView, 后续根据需要可能会扩展类似于淘宝头条和大众点评的双行/带图片的轮播视图
+
+![轮播视图](http://upload-images.jianshu.io/upload_images/1929170-665c66011885aafc.gif?imageMogr2/auto-orient/strip)
+
+- 新增一款指示器和 ViewPager 滑动效果
+
+![banner、指示器](http://upload-images.jianshu.io/upload_images/1929170-2c3b2eb649c3d1eb.gif?imageMogr2/auto-orient/strip)
+
+- 新增 AutoEditText, 封装了隐藏软键盘时自动隐藏光标，设置最大输入字数等常用方法
 
 ### BitmapUtil
 
