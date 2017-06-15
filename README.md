@@ -49,11 +49,16 @@
 |----|------|
 |getDayInWeek | 根据格式化字符串时间计算周几|
 |dx2dp | px转化为dp|
+|dp2dx | dp转化为dx|
+|sp2px | sp转化为px|
+|px2sp | px转化为sp|
 |getFileMD5 | 获得文件MD5值|
 
 
-### StatusUtil
+### PhoneUtils
 
 |方法名 | 作用 |
 |----|------|
+|isPad | 是否是Pad|
+|isKeyBoardShowing | 获得软键盘是否调起|
 |isKeyBoardShowing | 获得软键盘是否调起|

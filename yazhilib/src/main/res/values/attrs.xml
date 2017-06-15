@@ -127,13 +127,6 @@
         <attr name="rv_enable"/>
     </declare-styleable>
 
-    <declare-styleable name="AutoEditText">
-        <attr name="editTextType" format="enum">
-            <enum name="clear" value="0"></enum>
-            <enum name="password" value="1"></enum>
-        </attr>
-    </declare-styleable>
-
     <attr name="lv_textsize" format="dimension"/>
     <attr name="lv_lineSpace" format="float"/>
     <attr name="lv_centerTextColor" format="color"/>

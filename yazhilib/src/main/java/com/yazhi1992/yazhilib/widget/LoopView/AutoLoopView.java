@@ -121,6 +121,7 @@ public class AutoLoopView extends View {
             //通过对文字高度做缩放来达到滚轮的效果
             canvas.scale(1, (float) cos);
             if (i == 0) {
+                //文字
                 canvas.drawText(mItems.get(mCurrentItem % mItems.size()), 100, (mHeight + mItemHeight) / 2, mTextPaint);
             } else {
                 canvas.drawText(mItems.get((mCurrentItem + 1) % mItems.size()), 100, (mHeight + mItemHeight) / 2, mTextPaint);

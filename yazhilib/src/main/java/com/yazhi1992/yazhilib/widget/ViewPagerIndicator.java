@@ -151,7 +151,7 @@ public class ViewPagerIndicator extends View implements ViewPager.OnPageChangeLi
                 float offset = mDistance * (1 - mCurrentPageOffset);
                 canvas.drawLine(startX, mCenter.y, startX + mShortDistance + offset, mCenter.y, mPaint);
                 startX += mShortDistance + offset + mSpacing;
-            } else if (i == (mCurrentPage + 1) % 5) {
+            } else if (i == (mCurrentPage + 1) % mTotalPages) {
                 mPaint.setColor(CalcUtil.evaluateColor(mColor, mUnselectedColor, 1 - mCurrentPageOffset));
                 float offset = mDistance * mCurrentPageOffset;
                 canvas.drawLine(startX, mCenter.y, startX + mShortDistance + offset, mCenter.y, mPaint);
