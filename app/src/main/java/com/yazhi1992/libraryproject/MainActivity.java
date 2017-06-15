@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         mVp.setCurrentItem(count - (count % 5));
         mVp.setPageMargin((int) CalcUtil.dp2px(this, 10));
         mIndicator = (ViewPagerIndicator) findViewById(R.id.indicator);
+        mIndicator.setRadius(20);
         mVp.setOffscreenPageLimit(3);
         mVp.setPageTransformer(true, new ScaleTransformer());
         mIndicator.setTotalPages(5);

@@ -2,12 +2,12 @@
 
 ## 版本更新历史
 
-### 0.0.3
+### 0.0.1
 
 - 新增可自定义圆角的 TextView (参考[FlycoRoundView](https://github.com/H07000223/FlycoRoundView))
 - 新增 BitmapUtil、CalcUtil
 
-### 0.0.7 
+### 0.0.2 
 
 - 新增 RoundLoadingView ，在 RoundRelativelayout 的基础上添加了 loading 状态和倒计时状态
 
@@ -15,7 +15,7 @@
 
 - 修复 RoundViewDelegate 中 mCornerRadius_BR 和 mCornerRadius_BL 颠倒的问题
 
-### 0.0.10
+### 0.0.3
 
 - 新增新闻轮播控件 AutoLoopView, 后续根据需要可能会扩展类似于淘宝头条和大众点评的双行/带图片的轮播视图
 

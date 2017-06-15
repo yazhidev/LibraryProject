@@ -200,6 +200,7 @@ public class ViewPagerIndicator extends View implements ViewPager.OnPageChangeLi
      */
     public void setRadius(int size) {
         mRadius = size;
+        mPaint.setStrokeWidth(mRadius * 2);
     }
 
     /**
@@ -208,7 +209,7 @@ public class ViewPagerIndicator extends View implements ViewPager.OnPageChangeLi
      * @param spacing
      */
     public void setSpacing(int spacing) {
-        mSpacing = spacing;
+        mSpacing = spacing + mRadius * 2;
     }
 
 }

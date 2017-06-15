@@ -1,27 +1,22 @@
 package com.yazhi1992.libraryproject;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yazhi1992.yazhilib.widget.LoopView.AutoLoopView;
-import com.yazhi1992.yazhilib.widget.LoopView.SuperAutoLoopView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.data;
 
 public class Main2Activity extends AppCompatActivity {
 
     private AutoLoopView mViewById;
     private List<String> mList;
-    private SuperAutoLoopView mViewById1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
