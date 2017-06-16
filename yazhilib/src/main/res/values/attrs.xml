@@ -161,4 +161,34 @@
         <attr name="matProg_barWidth" format="dimension" />
         <attr name="matProg_linearProgress" format="boolean" />
     </declare-styleable>
+
+    <!--总共的星星数-->
+    <attr name="totalNum" format="integer"/>
+    <!--是否可操作-->
+    <attr name="canEdit" format="boolean"/>
+    <!--单个星星的宽度-->
+    <attr name="widthAndHeight" format="dimension"/>
+    <!--星星左右间距-->
+    <attr name="marginDistance" format="dimension"/>
+    <!--选中的星星数目-->
+    <attr name="selectedNum" format="float"/>
+    <!--星星选中时的资源图片-->
+    <attr name="fullStarResId" format="reference"/>
+    <!--星星未选中时的资源图片-->
+    <attr name="emptyStarResId" format="reference"/>
+    <!--半颗星星的资源图片-->
+    <attr name="halfStarResId" format="reference"/>
+    <!--是否支持大小不等星星样式-->
+    <attr name="differentSize" format="boolean"/>
+
+    <declare-styleable name="YZRatingBar">
+        <attr name="totalNum"/>
+        <attr name="canEdit"/>
+        <attr name="widthAndHeight"/>
+        <attr name="marginDistance"/>
+        <attr name="selectedNum"/>
+        <attr name="fullStarResId"/>
+        <attr name="emptyStarResId"/>
+        <attr name="halfStarResId"/>
+    </declare-styleable>
 </resources>
