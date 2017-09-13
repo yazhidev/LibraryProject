@@ -10,7 +10,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.fudaojun.fudaojunlib.widget.ScannerClient;
+import com.yazhi1992.yazhilib.widget.ScannerClient;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -92,10 +92,10 @@ public class LibBitmapUtil {
             insertImageToGallery(context, path, null, listener);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            LibSentryUtil.captureMessage("BitmapUtils saveBitmap " + e.toString());
+            LibUtils.myLog("BitmapUtils saveBitmap " + e.toString());
             result = null;
         } catch (IOException e) {
-            LibSentryUtil.captureMessage("BitmapUtils saveBitmap " + e.toString());
+            LibUtils.myLog("BitmapUtils saveBitmap " + e.toString());
             e.printStackTrace();
             result = null;
         }
@@ -297,7 +297,7 @@ public class LibBitmapUtil {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             bitmap = null;
-            LibSentryUtil.captureMessage("图片地址解析错误 url:" + url);
+            LibUtils.myLog("图片地址解析错误 url:" + url);
         } finally {
             if (fis != null) {
                 try {
@@ -332,7 +332,7 @@ public class LibBitmapUtil {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             bitmap = null;
-            LibSentryUtil.captureMessage("图片地址解析错误 url:" + url);
+            LibUtils.myLog("图片地址解析错误 url:" + url);
         } finally {
             if (fis != null) {
                 try {

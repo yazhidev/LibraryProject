@@ -4,14 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.RectF;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.yazhi1992.yazhilib.R;
-import com.yazhi1992.yazhilib.utils.CalcUtil;
+import com.yazhi1992.yazhilib.utils.LibCalcUtil;
+
 
 /**
  * viewpager指示器
@@ -62,11 +61,11 @@ public class ViewPagerIndicator extends View implements ViewPager.OnPageChangeLi
     public ViewPagerIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
-        mRadius = (int) CalcUtil.dp2px(context, 4);
-        mShortDistance = (int) CalcUtil.dp2px(context, 10);
-        mLongDistance = (int) CalcUtil.dp2px(context, 30);
+        mRadius = (int) LibCalcUtil.dp2px(context, 2);
+        mShortDistance = (int) LibCalcUtil.dp2px(context, 6);
+        mLongDistance = (int) LibCalcUtil.dp2px(context, 22);
         mDistance = mLongDistance - mShortDistance;
-        mSpacing = (int) CalcUtil.dp2px(context, 5) + mRadius * 2;
+        mSpacing = (int) LibCalcUtil.dp2px(context, 4) + mRadius * 2;
 
         mPaint.setStrokeWidth(mRadius * 2);
     }
@@ -85,6 +84,7 @@ public class ViewPagerIndicator extends View implements ViewPager.OnPageChangeLi
 
     public void setLongDistance(int longDistance) {
         mLongDistance = longDistance;
+        mDistance = mLongDistance - mShortDistance;
     }
 
     public int getShortDistance() {
@@ -93,6 +93,7 @@ public class ViewPagerIndicator extends View implements ViewPager.OnPageChangeLi
 
     public void setShortDistance(int shortDistance) {
         mShortDistance = shortDistance;
+        mDistance = mLongDistance - mShortDistance;
     }
 
     // 初始化
@@ -152,12 +153,12 @@ public class ViewPagerIndicator extends View implements ViewPager.OnPageChangeLi
                 if (i == mCurrentPage) {
                     //往右翻页，offset 0->1，早offset=1时mCurrentPage变成目标页
                     //往左翻页，mCurrentPage马上变成目标页，offset 1->0
-                    mPaint.setColor(CalcUtil.evaluateColor(mColor, mUnselectedColor, mCurrentPageOffset));
+                    mPaint.setColor(LibCalcUtil.evaluateColor(mColor, mUnselectedColor, mCurrentPageOffset));
                     float offset = mDistance * (1 - mCurrentPageOffset);
                     canvas.drawLine(startX, mCenter.y, startX + mShortDistance + offset, mCenter.y, mPaint);
                     startX += mShortDistance + offset + mSpacing;
                 } else if (i == (mCurrentPage + 1) % mTotalPages) {
-                    mPaint.setColor(CalcUtil.evaluateColor(mColor, mUnselectedColor, 1 - mCurrentPageOffset));
+                    mPaint.setColor(LibCalcUtil.evaluateColor(mColor, mUnselectedColor, 1 - mCurrentPageOffset));
                     float offset = mDistance * mCurrentPageOffset;
                     canvas.drawLine(startX, mCenter.y, startX + mShortDistance + offset, mCenter.y, mPaint);
                     startX += mShortDistance + offset + mSpacing;

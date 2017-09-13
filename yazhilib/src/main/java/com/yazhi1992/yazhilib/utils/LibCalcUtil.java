@@ -16,6 +16,10 @@ public class LibCalcUtil {
     private LibCalcUtil() {
     }
 
+    // TODO: 2017/9/13 修改为不必引用上下文
+    // TODO: 2017/9/13 roundloadingview设置背景色bug
+    // TODO: 2017/9/13 添加网络层
+
     public static float dp2px(Context Context, int dp) {
         final float scale = Context.getResources().getDisplayMetrics().densityDpi;
         return dp * (scale / 160) + 0.5f;

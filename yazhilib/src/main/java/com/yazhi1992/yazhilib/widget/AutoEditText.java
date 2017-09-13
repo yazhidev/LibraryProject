@@ -8,7 +8,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
 
-import com.yazhi1992.yazhilib.utils.PhoneUtils;
+import com.yazhi1992.yazhilib.utils.LibUtils;
+
 
 /**
  * Created by zengyazhi on 17/6/6.
@@ -68,10 +69,10 @@ public class AutoEditText extends EditText implements TextWatcher {
         outView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                boolean keyShow = PhoneUtils.isKeyBoardShowing(outView);
+                boolean keyShow = LibUtils.isKeyBoardShowing(outView);
                 if (keyShow != mIsKeyShow) {
                     mIsKeyShow = keyShow;
-                    if (!PhoneUtils.isKeyBoardShowing(outView)) {
+                    if (!LibUtils.isKeyBoardShowing(outView)) {
                         //隐藏键盘
                         if (isFocused()) {
                             clearFocus();

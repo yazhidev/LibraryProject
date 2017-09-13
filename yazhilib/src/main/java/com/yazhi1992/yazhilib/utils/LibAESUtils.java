@@ -40,7 +40,7 @@ public class LibAESUtils {
             byte[] encryptedBytes = aesEncryptBytes(contentBytes, keyBytes);
             return new String(Base64.encode(encryptedBytes, Base64.URL_SAFE), charset);
         } catch (Exception e) {
-            LibSentryUtil.captureMessage("LibAESUtils encrypt Exception " + e.toString()
+            LibUtils.myLog("LibAESUtils encrypt Exception " + e.toString()
                     + " content " + content
                     + " key " + key);
             return content;
@@ -61,7 +61,7 @@ public class LibAESUtils {
             byte[] decryptedBytes = aesDecryptBytes(encryptedBytes, keyBytes);
             return new String(decryptedBytes, charset);
         } catch (Exception e) {
-            LibSentryUtil.captureMessage("LibAESUtils encrypt Exception " + e.toString()
+            LibUtils.myLog("LibAESUtils encrypt Exception " + e.toString()
                     + " content " + content
                     + " key " + key);
             return content;

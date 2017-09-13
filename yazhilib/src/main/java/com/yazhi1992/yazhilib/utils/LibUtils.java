@@ -34,6 +34,8 @@ import java.util.regex.Pattern;
 
 public class LibUtils {
 
+    private static final String DEBUG_TAG = "zyz";
+
     private LibUtils() {
     }
 
@@ -240,8 +242,6 @@ public class LibUtils {
         return displaysMetrics;
     }
 
-    private static final String DEBUG_TAG = "fdj";
-
     /**
      * 读取assets文件的内容
      *
@@ -352,7 +352,7 @@ public class LibUtils {
     public static String getSerialNum() {
         String serial = Build.SERIAL;
         if (serial == null || serial.isEmpty()) {
-            LibSentryUtil.captureMessage("getSerialNum error");
+            LibUtils.myLog("getSerialNum error");
             return "";
         } else {
             return serial;
@@ -372,7 +372,7 @@ public class LibUtils {
 //        String deviceId = tm.getDeviceId();
         String deviceId = "test";
         if (deviceId == null || deviceId.isEmpty()) {
-            LibSentryUtil.captureMessage("getDeviceId error");
+            LibUtils.myLog("getDeviceId error");
             return "";
         } else {
             return deviceId;
@@ -384,7 +384,7 @@ public class LibUtils {
 //        String simSerialNumber = tm.getSimSerialNumber();
         String simSerialNumber = "";
         if (simSerialNumber == null || simSerialNumber.isEmpty()) {
-            LibSentryUtil.captureMessage("getSimSerialNumber error");
+            LibUtils.myLog("getSimSerialNumber error");
             return "";
         } else {
             return simSerialNumber;
@@ -394,7 +394,7 @@ public class LibUtils {
     public static String getAndroidId(Context context) {
         String androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         if (androidId == null || androidId.isEmpty()) {
-            LibSentryUtil.captureMessage("getAndroidId error");
+            LibUtils.myLog("getAndroidId error");
             return "";
         } else {
             return androidId;

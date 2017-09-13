@@ -22,7 +22,6 @@ import android.view.View;
 
 import com.yazhi1992.yazhilib.R;
 
-
 /**
  * A Material style progress wheel, compatible up to 2.2.
  * Todd Davies' Progress Wheel https://github.com/Todd-Davies/ProgressWheel
@@ -102,7 +101,7 @@ public class ProgressWheel extends View {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1) private void setAnimationEnabled() {
-        int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+        int currentApiVersion = Build.VERSION.SDK_INT;
 
         float animationValue;
         if (currentApiVersion >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -120,7 +119,8 @@ public class ProgressWheel extends View {
     //Setting up stuff
     //----------------------------------
 
-    @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int viewWidth = circleRadius + this.getPaddingLeft() + this.getPaddingRight();
@@ -166,7 +166,8 @@ public class ProgressWheel extends View {
      * because this method is called after measuring the dimensions of MATCH_PARENT & WRAP_CONTENT.
      * Use this dimensions to setup the bounds and paints.
      */
-    @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
         setupBounds(w, h);
@@ -352,7 +353,8 @@ public class ProgressWheel extends View {
         }
     }
 
-    @Override protected void onVisibilityChanged(View changedView, int visibility) {
+    @Override
+    protected void onVisibilityChanged(View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
 
         if (visibility == VISIBLE) {
@@ -468,7 +470,8 @@ public class ProgressWheel extends View {
     }
 
     // Great way to save a view's state http://stackoverflow.com/a/7089687/1991053
-    @Override public Parcelable onSaveInstanceState() {
+    @Override
+    public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
 
         WheelSavedState ss = new WheelSavedState(superState);
@@ -489,7 +492,8 @@ public class ProgressWheel extends View {
         return ss;
     }
 
-    @Override public void onRestoreInstanceState(Parcelable state) {
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
         if (!(state instanceof WheelSavedState)) {
             super.onRestoreInstanceState(state);
             return;
@@ -704,10 +708,10 @@ public class ProgressWheel extends View {
         public void onProgressUpdate(float progress);
     }
 
-    static class WheelSavedState extends View.BaseSavedState {
+    static class WheelSavedState extends BaseSavedState {
         //required field that makes Parcelables from a Parcel
-        public static final Parcelable.Creator<WheelSavedState> CREATOR =
-                new Parcelable.Creator<WheelSavedState>() {
+        public static final Creator<WheelSavedState> CREATOR =
+                new Creator<WheelSavedState>() {
                     public WheelSavedState createFromParcel(Parcel in) {
                         return new WheelSavedState(in);
                     }
@@ -747,7 +751,8 @@ public class ProgressWheel extends View {
             this.fillRadius = in.readByte() != 0;
         }
 
-        @Override public void writeToParcel(Parcel out, int flags) {
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeFloat(this.mProgress);
             out.writeFloat(this.mTargetProgress);

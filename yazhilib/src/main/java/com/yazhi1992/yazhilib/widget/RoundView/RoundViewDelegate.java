@@ -5,19 +5,17 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yazhi1992.yazhilib.R;
-import com.yazhi1992.yazhilib.utils.CalcUtil;
 
-import static android.R.attr.enabled;
+import com.yazhi1992.yazhilib.R;
+import com.yazhi1992.yazhilib.utils.LibCalcUtil;
+
 import static android.R.attr.state_enabled;
-import static android.R.attr.state_focused;
 import static android.R.attr.state_pressed;
 
 /**
@@ -143,7 +141,7 @@ public class RoundViewDelegate {
     }
 
     public void setCornerRadius(int cornerRadius) {
-        mCornerRadius = (int) CalcUtil.dp2px(mContext, cornerRadius);
+        mCornerRadius = (int) LibCalcUtil.dp2px(mContext, cornerRadius);
         setBgSelector();
     }
 

@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yazhi1992.yazhilib.R;
-import com.yazhi1992.yazhilib.utils.CalcUtil;
+import com.yazhi1992.yazhilib.utils.LibCalcUtil;
 import com.yazhi1992.yazhilib.widget.ProgressWheel.ProgressWheel;
 
 import java.util.Timer;
@@ -31,6 +31,7 @@ import static android.R.attr.state_pressed;
  */
 
 public class RoundLoadingView extends RelativeLayout {
+    //test
     private RoundViewDelegate mDelegate;
     private TextView mTextView;
     private ProgressWheel mProgressWheel;
@@ -109,8 +110,8 @@ public class RoundLoadingView extends RelativeLayout {
             mTextPressColor = typedArray.getColor(R.styleable.RoundLoadingView_rv_textPressColor, Color.parseColor("#333333"));
             mTextDisableColor = typedArray.getColor(R.styleable.RoundLoadingView_rv_textDisableColor, Color.parseColor("#333333"));
             mCircleColor = typedArray.getColor(R.styleable.RoundLoadingView_rv_circleColor, Color.parseColor("#ffffff"));
-            mCircleWidth = typedArray.getDimensionPixelSize(R.styleable.RoundLoadingView_rv_circleWidth, (int) CalcUtil.dp2px(context, 2));
-            mCircleRadiu = typedArray.getDimensionPixelSize(R.styleable.RoundLoadingView_rv_circleRadius, (int) CalcUtil.dp2px(context, 16));
+            mCircleWidth = typedArray.getDimensionPixelSize(R.styleable.RoundLoadingView_rv_circleWidth, (int) LibCalcUtil.dp2px(context, 2));
+            mCircleRadiu = typedArray.getDimensionPixelSize(R.styleable.RoundLoadingView_rv_circleRadius, (int) LibCalcUtil.dp2px(context, 16));
             mEnable = typedArray.getBoolean(R.styleable.RoundLoadingView_rv_enable, true);
         } finally {
             if (typedArray != null) {

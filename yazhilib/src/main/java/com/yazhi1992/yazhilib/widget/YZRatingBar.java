@@ -12,7 +12,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import com.yazhi1992.yazhilib.R;
-import com.yazhi1992.yazhilib.utils.CalcUtil;
+import com.yazhi1992.yazhilib.utils.LibCalcUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +46,10 @@ public class YZRatingBar extends LinearLayout {
         differentSize = typedArray.getBoolean(R.styleable.YZRatingBar_marginDistance, false);
         widthAndHeight = typedArray.getDimension(
                 R.styleable.YZRatingBar_widthAndHeight,
-                CalcUtil.dp2px(context, 0));
+                LibCalcUtil.dp2px(context, 0));
         dividerWidth = typedArray.getDimension(
                 R.styleable.YZRatingBar_marginDistance,
-                CalcUtil.dp2px(context, 0));
+                LibCalcUtil.dp2px(context, 0));
         stateResId = typedArray.getResourceId(
                 R.styleable.YZRatingBar_fullStarResId , -1);
         initView();

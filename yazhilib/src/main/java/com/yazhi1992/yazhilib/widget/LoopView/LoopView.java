@@ -1,11 +1,5 @@
 package com.yazhi1992.yazhilib.widget.LoopView;
 
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -14,21 +8,23 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-
 import com.yazhi1992.yazhilib.R;
-
-import static android.R.attr.bottom;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Weidongjian on 2015/8/18.
  * <p>
  * 参考：https://github.com/weidongjian/androidWheelView/
  */
-public class LoopView extends View {
+public abstract class LoopView<T> extends View {
 
     private float scaleX = 1.0F;
 
@@ -56,7 +52,8 @@ public class LoopView extends View {
     private Paint paintCenterText;
     private Paint paintIndicator;
 
-    List<String> items;
+    List<T> items;
+    List<String> StrItems = new ArrayList<>();
 
     int textSize;
     int maxTextHeight;
@@ -319,15 +316,36 @@ public class LoopView extends View {
         onItemSelectedListener = OnItemSelectedListener;
     }
 
-    public final void setItems(List<String> items) {
+    public final void setItems(List<T> items) {
         this.items = items;
+        if (items.size() > 0 && items.get(0) instanceof String) {
+            StrItems = (List<String>) items;
+        } else {
+            StrItems.clear();
+            for (int i = 0; i < items.size(); i++) {
+                StrItems.add(bindData(items.get(i)));
+            }
+        }
         remeasure();
         invalidate();
+    }
+
+    public int getCount() {
+        return items == null ? -1 : items.size();
     }
 
     public final int getSelectedItem() {
         return selectedItem;
     }
+
+    public List<T> getItems() {
+        return items;
+    }
+
+    public T getSelectedItemData() {
+        return items.get(selectedItem);
+    }
+
     //
     // protected final void scrollBy(float velocityY) {
     // Timer timer = new Timer();
@@ -368,6 +386,8 @@ public class LoopView extends View {
         }
     }
 
+    protected abstract String bindData(T data);
+
     @Override
     protected void onDraw(Canvas canvas) {
         //fix java.lang.ArithmeticException divide by zero
@@ -407,13 +427,16 @@ public class LoopView extends View {
                 while (l1 > items.size() - 1) {
                     l1 = l1 - items.size();
                 }
-                drawingStrings[k1] = items.get(l1);
+//                drawingStrings[k1] = items.get(l1);
+                drawingStrings[k1] = bindData(items.get(l1));
             } else if (l1 < 0) {
                 drawingStrings[k1] = "";
             } else if (l1 > items.size() - 1) {
                 drawingStrings[k1] = "";
             } else {
-                drawingStrings[k1] = items.get(l1);
+//                drawingStrings[k1] = items.get(l1);
+                drawingStrings[k1] = bindData(items.get(l1));
+
             }
             k1++;
         }
@@ -462,7 +485,7 @@ public class LoopView extends View {
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
                     canvas.drawText(drawingStrings[i], getTextX(drawingStrings[i], paintCenterText, tempRect),
                             maxTextHeight, paintCenterText);
-                    selectedItem = items.indexOf(drawingStrings[i]);
+                    selectedItem = StrItems.indexOf(drawingStrings[i]);
                 } else {
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
                     canvas.drawText(drawingStrings[i], getTextX(drawingStrings[i], paintOuterText, tempRect),
@@ -518,12 +541,14 @@ public class LoopView extends View {
 
                 if (!isLoop) {
                     float top = -initPosition * itemHeight;
-                    float bottom = (items.size() - 1 - initPosition) * itemHeight;
+                    if(items!=null && items.size()>0){
+                        float bottom = (items.size() - 1 - initPosition) * itemHeight;
 
-                    if (totalScrollY < top) {
-                        totalScrollY = (int) top;
-                    } else if (totalScrollY > bottom) {
-                        totalScrollY = (int) bottom;
+                        if (totalScrollY < top) {
+                            totalScrollY = (int) top;
+                        } else if (totalScrollY > bottom) {
+                            totalScrollY = (int) bottom;
+                        }
                     }
                 }
                 break;

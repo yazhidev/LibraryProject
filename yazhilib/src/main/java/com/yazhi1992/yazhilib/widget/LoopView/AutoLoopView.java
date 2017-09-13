@@ -9,11 +9,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.yazhi1992.yazhilib.utils.CalcUtil;
+import com.yazhi1992.yazhilib.utils.LibCalcUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +76,7 @@ public class AutoLoopView extends View {
         mTextPaint = new Paint();
         mTextPaint.setAntiAlias(true);
         mTextPaint.setColor(Color.BLACK);
-        mTextPaint.setTextSize(CalcUtil.sp2px(context, 16));
+        mTextPaint.setTextSize(LibCalcUtil.sp2px(context, 16));
         mItemHeight = Math.abs(mTextPaint.ascent());
     }
 

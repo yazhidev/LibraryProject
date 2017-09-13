@@ -2,4 +2,6 @@
 <resources>
     <color name="mainRed">#F26355</color>
     <color name="gray">#dddddd</color>
+    <color name="theme_body">#cc22292c</color>
+    <color name="status_bar">#303135</color>
 </resources>

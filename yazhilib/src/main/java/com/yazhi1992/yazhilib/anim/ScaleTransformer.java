@@ -5,6 +5,8 @@ import android.view.View;
 
 /**
  * Created by zengyazhi on 17/6/12.
+ *
+ * 辅导君首页老师图片滑动效果
  */
 
 public class ScaleTransformer implements ViewPager.PageTransformer {

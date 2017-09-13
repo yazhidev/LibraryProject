@@ -12,7 +12,7 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import com.yazhi1992.yazhilib.anim.ScaleTransformer;
-import com.yazhi1992.yazhilib.utils.CalcUtil;
+import com.yazhi1992.yazhilib.utils.LibCalcUtil;
 import com.yazhi1992.yazhilib.widget.AutoEditText;
 import com.yazhi1992.yazhilib.widget.RoundView.RoundLoadingView;
 import com.yazhi1992.yazhilib.widget.RoundView.RoundRelativeLayout;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mVp.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
         int count = Integer.MAX_VALUE / 2;
         mVp.setCurrentItem(count - mTotalNum == 1 ? 0 : (count % mTotalNum));
-        mVp.setPageMargin((int) CalcUtil.dp2px(this, 10));
+        mVp.setPageMargin((int) LibCalcUtil.dp2px(this, 10));
         mIndicator = (ViewPagerIndicator) findViewById(R.id.indicator);
         mIndicator.setRadius(8);
         mVp.setOffscreenPageLimit(3);
