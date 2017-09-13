@@ -4,39 +4,41 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
+import android.view.animation.AnimationSet;
 import android.widget.FrameLayout;
 
 /**
  * Created by zengyazhi on 17/5/16.
  */
 
-public abstract class BaseBottomDialog<T extends BaseBottomDialog<T>> extends BaseDialog<T> {
+public abstract class BaseCenterDialog<T extends BaseCenterDialog<T>> extends BaseDialog<T> {
 
-    protected Animation mInnerShowAnim;
-    protected Animation mInnerDismissAnim;
-    protected long mInnerAnimationDuration = 300;
+    private AnimationSet mInnerShowAnim;
+    private AnimationSet mInnerDismissAnim;
+    protected long mInnerAnimationDuration = 200;
     protected boolean mIsInnerShowAnim;
     protected boolean mIsInnerDismissAnim;
 
-    public BaseBottomDialog(Context context) {
+    public BaseCenterDialog(Context context) {
         super(context);
 
+        mInnerShowAnim = new AnimationSet(false);
         /*默认的动画*/
-        mInnerShowAnim = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
-                Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF, 0);
-
-        mInnerDismissAnim = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
-                Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 1);
+//        ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f, 1, 0.5f, 1
+//                , Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+//        mInnerShowAnim.addAnimation(scaleAnimation);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        mInnerShowAnim.addAnimation(alphaAnimation);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         mTopLayout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mTopLayout.setGravity(Gravity.BOTTOM);
-        getWindow().setGravity(Gravity.BOTTOM);
+        mTopLayout.setGravity(Gravity.CENTER);
+        getWindow().setGravity(Gravity.CENTER);
     }
 
     @Override
@@ -51,7 +53,7 @@ public abstract class BaseBottomDialog<T extends BaseBottomDialog<T>> extends Ba
     }
 
     protected void showWithAnim() {
-        if(mInnerShowAnim != null) {
+        if (mInnerShowAnim != null) {
             mInnerShowAnim.setDuration(mInnerAnimationDuration);
             mInnerShowAnim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -70,13 +72,13 @@ public abstract class BaseBottomDialog<T extends BaseBottomDialog<T>> extends Ba
                 }
             });
             mControlHeightLayout.startAnimation(mInnerShowAnim);
-        }else {
+        } else {
             super.dismiss();
         }
     }
 
     protected void dismissWithAnim() {
-        if(mInnerDismissAnim != null) {
+        if (mInnerDismissAnim != null) {
             mInnerDismissAnim.setDuration(mInnerAnimationDuration);
             mInnerDismissAnim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -87,7 +89,7 @@ public abstract class BaseBottomDialog<T extends BaseBottomDialog<T>> extends Ba
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     mIsInnerDismissAnim = false;
-                    BaseBottomDialog.super.dismiss();
+                    BaseCenterDialog.super.dismiss();
                 }
 
                 @Override
@@ -103,7 +105,7 @@ public abstract class BaseBottomDialog<T extends BaseBottomDialog<T>> extends Ba
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(mIsInnerShowAnim || mIsInnerDismissAnim) {
+        if (mIsInnerShowAnim || mIsInnerDismissAnim) {
             return true;
         }
         return super.onTouchEvent(event);
@@ -111,17 +113,17 @@ public abstract class BaseBottomDialog<T extends BaseBottomDialog<T>> extends Ba
 
     @Override
     public void onBackPressed() {
-        if(mIsInnerShowAnim || mIsInnerDismissAnim) {
+        if (mIsInnerShowAnim || mIsInnerDismissAnim) {
             return;
         }
         super.onBackPressed();
     }
 
-    public void setInnerShowAnim(Animation innerShowAnim) {
+    public void setInnerShowAnim(AnimationSet innerShowAnim) {
         mInnerShowAnim = innerShowAnim;
     }
 
-    public void setInnerDismissAnim(Animation innerDismissAnim) {
+    public void setInnerDismissAnim(AnimationSet innerDismissAnim) {
         mInnerDismissAnim = innerDismissAnim;
     }
 

@@ -153,7 +153,7 @@ public class RoundLoadingView extends RelativeLayout {
         mProgressWheel.setBarColor(mCircleColor);
         addView(mProgressWheel);
 
-        if(!mEnable) {
+        if (!mEnable) {
             setEnabled(false);
         }
     }
@@ -232,7 +232,8 @@ public class RoundLoadingView extends RelativeLayout {
      * @param loading true加载/false停止加载
      */
     public void setLoading(boolean loading) {
-        if (mProgressWheel == null || loading == mProgressWheel.isSpinning() || mSecond != -1 || !isEnabled()) return;
+        if (mProgressWheel == null || loading == mProgressWheel.isSpinning() || mSecond != -1 || !isEnabled())
+            return;
         if (loading) {
             //开始选旋转
             mTextView.setVisibility(View.INVISIBLE);
@@ -341,7 +342,7 @@ public class RoundLoadingView extends RelativeLayout {
             mVideoTimerTask = null;
             mSecond = -1;
         }
-        setEnabled(true);
+        setEnabled(mEnable);
     }
 
 
@@ -428,6 +429,16 @@ public class RoundLoadingView extends RelativeLayout {
         } else {
             //加载时屏蔽点击事件
             return true;
+        }
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        //记录设置的状态
+        mEnable = enabled;
+        //如果还在倒计时则等待倒计时结束后设置状态
+        if (mSecond == -1) {
+            super.setEnabled(enabled);
         }
     }
 

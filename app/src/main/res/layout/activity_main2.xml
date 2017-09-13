@@ -10,28 +10,50 @@
 
     <com.yazhi1992.yazhilib.widget.LoopView.AutoLoopView
         android:id="@+id/autoLoop"
-        android:layout_marginTop="50dp"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
         />
 
-    <com.yazhi1992.yazhilib.widget.LoopView.SuperAutoLoopView
-        android:id="@+id/superL"
+    <com.yazhi1992.libraryproject.BottomScrollSwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_height="50dp"></com.yazhi1992.yazhilib.widget.LoopView.SuperAutoLoopView>
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="700dp"
+                    android:background="#666666"
+                    android:gravity="center"
+                    android:text="test"
+                    android:textSize="30sp"
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </com.yazhi1992.libraryproject.BottomScrollSwipeRefreshLayout>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="21dp"
-        android:layout_marginStart="21dp"
-        android:text="button"
-        android:layout_below="@+id/superL"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="27dp"/>
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="27dp"
+        android:text="button"
+        android:visibility="gone"/>
 
 </RelativeLayout>

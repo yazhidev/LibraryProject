@@ -143,23 +143,29 @@ public class ViewPagerIndicator extends View implements ViewPager.OnPageChangeLi
 
         float startX = mCenter.x - mAllDistance / 2;
 
-        for (int i = 0; i < mTotalPages; i++) {
-            if (i == mCurrentPage) {
-                //往右翻页，offset 0->1，早offset=1时mCurrentPage变成目标页
-                //往左翻页，mCurrentPage马上变成目标页，offset 1->0
-                mPaint.setColor(CalcUtil.evaluateColor(mColor, mUnselectedColor, mCurrentPageOffset));
-                float offset = mDistance * (1 - mCurrentPageOffset);
-                canvas.drawLine(startX, mCenter.y, startX + mShortDistance + offset, mCenter.y, mPaint);
-                startX += mShortDistance + offset + mSpacing;
-            } else if (i == (mCurrentPage + 1) % mTotalPages) {
-                mPaint.setColor(CalcUtil.evaluateColor(mColor, mUnselectedColor, 1 - mCurrentPageOffset));
-                float offset = mDistance * mCurrentPageOffset;
-                canvas.drawLine(startX, mCenter.y, startX + mShortDistance + offset, mCenter.y, mPaint);
-                startX += mShortDistance + offset + mSpacing;
-            } else {
-                mPaint.setColor(mUnselectedColor);
-                canvas.drawLine(startX, mCenter.y, startX + mShortDistance, mCenter.y, mPaint);
-                startX += mShortDistance + mSpacing;
+        if (mTotalPages <= 0) return;
+        if (mTotalPages == 1) {
+            mPaint.setColor(mColor);
+            canvas.drawLine(startX, mCenter.y, startX + mShortDistance + mDistance, mCenter.y, mPaint);
+        } else if (mTotalPages > 1) {
+            for (int i = 0; i < mTotalPages; i++) {
+                if (i == mCurrentPage) {
+                    //往右翻页，offset 0->1，早offset=1时mCurrentPage变成目标页
+                    //往左翻页，mCurrentPage马上变成目标页，offset 1->0
+                    mPaint.setColor(CalcUtil.evaluateColor(mColor, mUnselectedColor, mCurrentPageOffset));
+                    float offset = mDistance * (1 - mCurrentPageOffset);
+                    canvas.drawLine(startX, mCenter.y, startX + mShortDistance + offset, mCenter.y, mPaint);
+                    startX += mShortDistance + offset + mSpacing;
+                } else if (i == (mCurrentPage + 1) % mTotalPages) {
+                    mPaint.setColor(CalcUtil.evaluateColor(mColor, mUnselectedColor, 1 - mCurrentPageOffset));
+                    float offset = mDistance * mCurrentPageOffset;
+                    canvas.drawLine(startX, mCenter.y, startX + mShortDistance + offset, mCenter.y, mPaint);
+                    startX += mShortDistance + offset + mSpacing;
+                } else {
+                    mPaint.setColor(mUnselectedColor);
+                    canvas.drawLine(startX, mCenter.y, startX + mShortDistance, mCenter.y, mPaint);
+                    startX += mShortDistance + mSpacing;
+                }
             }
         }
     }

@@ -1,7 +1,6 @@
 package com.yazhi1992.yazhilib.utils;
 
 import android.content.Context;
-import android.util.TypedValue;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,9 +11,9 @@ import java.security.MessageDigest;
  * Created by zengyazhi on 17/5/17.
  */
 
-public class CalcUtil {
+public class LibCalcUtil {
 
-    private CalcUtil() {
+    private LibCalcUtil() {
     }
 
     public static float dp2px(Context Context, int dp) {

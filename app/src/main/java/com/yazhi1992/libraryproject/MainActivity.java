@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mVp;
     private ViewPagerIndicator mIndicator;
     private int mPosition;
+    private int mTotalNum = 1;
 
     class MyViewPagerAdapter extends FragmentPagerAdapter {
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return GuideFragment.getInstance(position % 5);
+            return GuideFragment.getInstance(position % mTotalNum);
         }
 
         @Override
@@ -56,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
         mVp = (ViewPager) findViewById(R.id.vp);
         mVp.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
         int count = Integer.MAX_VALUE / 2;
-        mVp.setCurrentItem(count - (count % 5));
+        mVp.setCurrentItem(count - mTotalNum == 1 ? 0 : (count % mTotalNum));
         mVp.setPageMargin((int) CalcUtil.dp2px(this, 10));
         mIndicator = (ViewPagerIndicator) findViewById(R.id.indicator);
-        mIndicator.setRadius(20);
+        mIndicator.setRadius(8);
         mVp.setOffscreenPageLimit(3);
         mVp.setPageTransformer(true, new ScaleTransformer());
-        mIndicator.setTotalPages(5);
+        mIndicator.setTotalPages(mTotalNum);
         mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

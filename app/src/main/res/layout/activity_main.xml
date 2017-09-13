@@ -16,12 +16,14 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="170dp"
+        android:visibility="gone"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:clipChildren="false"></android.support.v4.view.ViewPager>
 
     <com.yazhi1992.yazhilib.widget.ViewPagerIndicator
         android:id="@+id/indicator"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="20dp"/>
@@ -29,7 +31,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:orientation="horizontal">
 
         <Button
@@ -62,12 +63,11 @@
 
         <com.yazhi1992.yazhilib.widget.RoundView.RoundLoadingView
             android:id="@+id/loadingView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:visibility="gone"
             app:rv_backgroundColor="#ffffff"
             app:rv_backgroundDisableColor="#dddddd"
             app:rv_backgroundPressColor="#dddddd"
