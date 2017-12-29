@@ -1,0 +1,28 @@
+ext {
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.2'
+    targetSdkVersion = 21
+    minSdkVersion = 21
+
+    appcompatV7Version = '26.1.0'
+
+    arouterApiVersion = '1.3.0'
+    arouterCompilerVersion = '1.1.4'
+
+    robolectricVersion = "3.6.1"
+
+    dagger2CompilerVersion = "2.9"
+    dagger2Version = '2.9'
+
+    supportDesignVersion = '27.0.2'
+
+    loggerVersion = '2.1.1'
+
+    rxjavaVersion = '2.1.6'
+    rxandroidVersion = '2.0.1'
+
+    okhttpVersion = '3.9.1'
+}
+
+
+
