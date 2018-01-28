@@ -190,12 +190,17 @@ public class LibUtils {
      * 显示软键盘
      * 需要在主线程调用，且建议使用 postDelay 延迟 100 ms 调用
      */
-    public static void showKeyoard(Context context, EditText editText) {
+    public static void showKeyoard(final Context context, final EditText editText) {
         editText.setFocusable(true);
         editText.setFocusableInTouchMode(true);
         editText.requestFocus();
-        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.showSoftInput(editText, 0);
+        editText.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(context.INPUT_METHOD_SERVICE);
+                inputManager.showSoftInput(editText, 0);
+            }
+        }, 200);
     }
 
     /**
@@ -315,6 +320,10 @@ public class LibUtils {
 
     public static void showToast(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showLongToast(Context context, String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
 
     /**
