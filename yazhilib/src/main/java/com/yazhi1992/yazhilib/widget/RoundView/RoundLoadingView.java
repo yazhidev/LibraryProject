@@ -30,6 +30,7 @@ import static android.R.attr.state_pressed;
  * 带有倒计时功能、loading加载中、设置圆角/可用/点击颜色的textview
  */
 
+// TODO: 2018/1/27 不设置pressTextColor，应该使用已设置的正常的color
 public class RoundLoadingView extends RelativeLayout {
     //test
     private RoundViewDelegate mDelegate;
