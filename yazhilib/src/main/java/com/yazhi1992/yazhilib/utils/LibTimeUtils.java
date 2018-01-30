@@ -17,6 +17,26 @@ public class LibTimeUtils {
     private LibTimeUtils() {
     }
 
+    /**
+     * 获取两个日期相隔天数
+     * @param now
+     * @param day2
+     * @return 负数表示还距离指定日期多少天
+     */
+    public static int getGapBetweenTwoDay(Date now, Date day2) {
+        int gap = 0;
+        try {
+            String formatNow = ymdFormat.format(now);
+            String formatDay2 = ymdFormat.format(day2);
+            Date parseNow = ymdFormat.parse(formatNow);
+            Date parseDay2 = ymdFormat.parse(formatDay2);
+            gap = (int) ((parseNow.getTime() - parseDay2.getTime()) / 1000 / 60 / 60 / 24);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return gap;
+    }
+
     public static int getDayInWeekInt(Date date) {
         Calendar instance = Calendar.getInstance();
         instance.setTime(date);
