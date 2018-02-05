@@ -21,13 +21,15 @@ import java.util.List;
  * 星级评分
  *
  * @author xingliuhua
- *
- * https://github.com/xingliuhua/XLHRatingBar
+ *         <p>
+ *         https://github.com/xingliuhua/XLHRatingBar
  */
 public class YZRatingBar extends LinearLayout {
     private int countNum;// 共有几个星星
     private int countSelected;
     private int stateResId;
+    private int fullResId;
+    private int emptyResId;
     private float widthAndHeight;
     private float dividerWidth;
     private boolean canEdit;
@@ -50,8 +52,10 @@ public class YZRatingBar extends LinearLayout {
         dividerWidth = typedArray.getDimension(
                 R.styleable.YZRatingBar_marginDistance,
                 LibCalcUtil.dp2px(context, 0));
-        stateResId = typedArray.getResourceId(
-                R.styleable.YZRatingBar_fullStarResId , -1);
+        fullResId = typedArray.getResourceId(
+                R.styleable.YZRatingBar_fullStarResId, -1);
+        emptyResId = typedArray.getResourceId(
+                R.styleable.YZRatingBar_emptyStarResId, -1);
         initView();
     }
 
@@ -117,12 +121,16 @@ public class YZRatingBar extends LinearLayout {
             }
             addView(cb, layoutParams);
             cb.setButtonDrawable(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
-            if (stateResId == -1) {
+            if (fullResId == -1 || emptyResId == -1) {
+                fullResId = stateResId;
+                emptyResId = stateResId;
                 stateResId = R.drawable.comment_ratingbar_selector;
             }
-            cb.setBackgroundResource(stateResId);
             if (i + 1 <= countSelected) {
                 cb.setChecked(true);
+                cb.setBackgroundResource(fullResId);
+            } else {
+                cb.setBackgroundResource(emptyResId);
             }
             cb.setEnabled(canEdit);
             cb.setOnClickListener(new MyClickListener(i));
@@ -147,8 +155,14 @@ public class YZRatingBar extends LinearLayout {
 
                 if (i <= position) {
                     cb.setChecked(true);
+                    if(fullResId != -1) {
+                        cb.setBackgroundResource(fullResId);
+                    }
                 } else if (i > position) {
                     cb.setChecked(false);
+                    if(fullResId != -1) {
+                        cb.setBackgroundResource(emptyResId);
+                    }
                 }
             }
             if (mOnRatingChangeListener != null) {

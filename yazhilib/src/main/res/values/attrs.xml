@@ -171,7 +171,7 @@
     <!--星星左右间距-->
     <attr name="marginDistance" format="dimension"/>
     <!--选中的星星数目-->
-    <attr name="selectedNum" format="float"/>
+    <attr name="selectedNum" format="integer"/>
     <!--星星选中时的资源图片-->
     <attr name="fullStarResId" format="reference"/>
     <!--星星未选中时的资源图片-->

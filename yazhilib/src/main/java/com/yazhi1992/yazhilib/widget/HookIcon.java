@@ -22,6 +22,7 @@ import com.yazhi1992.yazhilib.utils.LibCalcUtil;
  */
 
 public class HookIcon extends View {
+
     private Paint mPaint;
     private int mCircleRadiu;
     private Context mContext;

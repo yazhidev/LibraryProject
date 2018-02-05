@@ -58,7 +58,6 @@ public class RoundViewDelegate {
         init(attrs);
     }
 
-    // TODO: 17/5/22 background 默认属性无效
     private void init(AttributeSet attrs) {
         TypedArray ta = mContext.obtainStyledAttributes(attrs, R.styleable.RoundTextView);
         mCornerRadius = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius, 0);
@@ -77,6 +76,18 @@ public class RoundViewDelegate {
         mCornerRadius_BL = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_BL, 0);
         mCornerRadius_BR = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_BR, 0);
         ta.recycle();
+        if(mStrokeColor != Color.TRANSPARENT && mStrokeColorPressed == Integer.MAX_VALUE) {
+            mStrokeColorPressed = mStrokeColor;
+        }
+        if(mStrokeColor != Color.TRANSPARENT && mStrokeDisableColor == Integer.MAX_VALUE) {
+            mStrokeDisableColor = mStrokeColor;
+        }
+        if(mBackgroundColor != Color.TRANSPARENT && mBackgroundColorPressed == Integer.MAX_VALUE) {
+            mBackgroundColorPressed = mBackgroundColor;
+        }
+        if(mBackgroundColor != Color.TRANSPARENT && mBackgroundDisableColor == Integer.MAX_VALUE) {
+            mBackgroundDisableColor = mBackgroundColor;
+        }
     }
 
     private void setDrawble(GradientDrawable gd, int bgColor, int strokeColor) {
