@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -438,10 +439,21 @@ public class LibUtils {
         }
     }
 
+    public static boolean listIsNullOrEmpty(List<Object> str) {
+        if (str == null || str.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static boolean notNullNorEmpty(String str) {
         return !isNullOrEmpty(str);
     }
 
+    public static boolean listNotNullNorEmpty(List<Object> list) {
+        return list != null && !list.isEmpty();
+    }
 
     /**
      * 保留两位小数
