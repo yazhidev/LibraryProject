@@ -76,6 +76,10 @@ public class RoundViewDelegate {
         mCornerRadius_BL = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_BL, 0);
         mCornerRadius_BR = ta.getDimensionPixelSize(R.styleable.RoundTextView_rv_cornerRadius_BR, 0);
         ta.recycle();
+        processDefaultColor();
+    }
+
+    private void processDefaultColor() {
         if(mStrokeColor != Color.TRANSPARENT && mStrokeColorPressed == Integer.MAX_VALUE) {
             mStrokeColorPressed = mStrokeColor;
         }
@@ -111,6 +115,8 @@ public class RoundViewDelegate {
     }
 
     public void setBgSelector() {
+        processDefaultColor();
+
         StateListDrawable stateListDrawable = new StateListDrawable();
         setDrawble(mGdBackground, mBackgroundColor, mStrokeColor);
 
