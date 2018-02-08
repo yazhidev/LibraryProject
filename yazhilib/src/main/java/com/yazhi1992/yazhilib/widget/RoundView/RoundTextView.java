@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import java.util.Date;
+
 /**
  * Created by zengyazhi on 17/5/17.
  */
@@ -37,4 +39,5 @@ public class RoundTextView extends TextView {
     public RoundViewDelegate getDelegate() {
         return mDelegate;
     }
+
 }
