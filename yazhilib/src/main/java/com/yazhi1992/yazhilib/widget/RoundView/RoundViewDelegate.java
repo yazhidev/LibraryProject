@@ -50,6 +50,11 @@ public class RoundViewDelegate {
     private GradientDrawable mGdBackground = new GradientDrawable();
     private GradientDrawable mGdBackgroundPressed = new GradientDrawable();
     private GradientDrawable mGdBackgroundDisable = new GradientDrawable();
+    //是否没有设值，没有设置则沿用正常状态下背景色
+    private boolean mStrokeColorPressedEmpty = false;
+    private boolean mStrokeDisableColorEmpty = false;
+    private boolean mBackgroundPressedEmpty = false;
+    private boolean mBackgroundDisableEmpty = false;
 
 
     public RoundViewDelegate(View view, Context context, AttributeSet attrs) {
@@ -80,17 +85,21 @@ public class RoundViewDelegate {
     }
 
     private void processDefaultColor() {
-        if(mStrokeColor != Color.TRANSPARENT && mStrokeColorPressed == Integer.MAX_VALUE) {
+        if ((mStrokeColor != Color.TRANSPARENT && mStrokeColorPressed == Integer.MAX_VALUE) || mStrokeColorPressedEmpty) {
             mStrokeColorPressed = mStrokeColor;
+            mStrokeColorPressedEmpty = true;
         }
-        if(mStrokeColor != Color.TRANSPARENT && mStrokeDisableColor == Integer.MAX_VALUE) {
+        if ((mStrokeColor != Color.TRANSPARENT && mStrokeDisableColor == Integer.MAX_VALUE) || mStrokeDisableColorEmpty) {
             mStrokeDisableColor = mStrokeColor;
+            mStrokeDisableColorEmpty = true;
         }
-        if(mBackgroundColor != Color.TRANSPARENT && mBackgroundColorPressed == Integer.MAX_VALUE) {
+        if ((mBackgroundColor != Color.TRANSPARENT && mBackgroundColorPressed == Integer.MAX_VALUE) || mBackgroundPressedEmpty) {
             mBackgroundColorPressed = mBackgroundColor;
+            mBackgroundPressedEmpty = true;
         }
-        if(mBackgroundColor != Color.TRANSPARENT && mBackgroundDisableColor == Integer.MAX_VALUE) {
+        if ((mBackgroundColor != Color.TRANSPARENT && mBackgroundDisableColor == Integer.MAX_VALUE) || mBackgroundDisableEmpty) {
             mBackgroundDisableColor = mBackgroundColor;
+            mBackgroundDisableEmpty = true;
         }
     }
 
