@@ -204,4 +204,10 @@
         </attr>
     </declare-styleable>
 
+    <attr name="vt_text" format="string"/>
+
+    <declare-styleable name="VerticalText">
+        <attr name="vt_text"/>
+    </declare-styleable>
+
 </resources>

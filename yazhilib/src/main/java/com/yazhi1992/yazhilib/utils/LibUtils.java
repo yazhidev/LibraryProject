@@ -1,6 +1,8 @@
 package com.yazhi1992.yazhilib.utils;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -575,4 +577,68 @@ public class LibUtils {
     public static boolean isMIUI() {
         return getBuildProperties().containsKey("ro.miui.ui.version.name");
     }
+
+    /**
+     * 检测app是否安装
+     * @param packageName
+     * @param context
+     * @return
+     */
+    public static boolean isAppInstall(String packageName, Context context) {
+        //判断是否安装
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            packageManager.getApplicationInfo(packageName ,PackageManager.GET_UNINSTALLED_PACKAGES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 跳转app
+     * @param packageName
+     * @param context
+     */
+    public static void gotoApp(String packageName, Context context) {
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 复制文本内容放到系统剪贴板里
+     * @param context
+     * @param str
+     */
+    public static void copyToClipboard(Context context, String str) {
+        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        //创建ClipData对象
+        ClipData clipData = ClipData.newPlainText("taobao text", str);
+        //添加ClipData对象到剪切板中
+        if(cm != null) {
+            cm.setPrimaryClip(clipData);
+        }
+    }
+
+    /**
+     * 选择浏览器打开链接
+     * @param context
+     * @param url
+     * @return false 代表没有浏览器可选择
+     */
+    public static boolean chooseBrowserOpenLink(Context context, String url) {
+        //从其他浏览器打开
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri = Uri.parse(url);
+        intent.setData(uri);
+        if(intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(Intent.createChooser(intent, "请选择浏览器"));
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
+
