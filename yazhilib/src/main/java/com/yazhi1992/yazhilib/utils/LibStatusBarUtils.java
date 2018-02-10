@@ -16,10 +16,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 /**
  * Created by zengyazhi on 2017/8/17.
- *
- * 沉浸式状态栏工具
  */
 
 public class LibStatusBarUtils {
@@ -34,6 +35,8 @@ public class LibStatusBarUtils {
     private boolean mIsActionBar;
     //侧滑菜单页面的内容视图
     private int mContentResourseIdInDrawer;
+    //是否是深色状态栏
+    private boolean mIsDarkStatusBar;
 
     public LibStatusBarUtils(Activity activity) {
         mActivity = activity;
@@ -74,6 +77,15 @@ public class LibStatusBarUtils {
         return this;
     }
 
+    public LibStatusBarUtils setIsDarkStatusBar(boolean isDark) {
+        mIsDarkStatusBar = isDark;
+        return this;
+    }
+
+    public boolean isDarkStatusBar() {
+        return mIsDarkStatusBar;
+    }
+
     /**
      * 是否是最外层布局为 DrawerLayout 的侧滑菜单
      *
@@ -88,6 +100,7 @@ public class LibStatusBarUtils {
     }
 
     public void init() {
+        setStatusBarMode(mActivity, isDarkStatusBar());
         fullScreen(mActivity);
         if (mColor != -1) {
             //设置了状态栏颜色
@@ -282,7 +295,8 @@ public class LibStatusBarUtils {
                 Window window = activity.getWindow();
                 View decorView = window.getDecorView();
                 //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
-                int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                int option = window.getDecorView().getSystemUiVisibility()
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
                 window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                 decorView.setSystemUiVisibility(option);
@@ -318,8 +332,8 @@ public class LibStatusBarUtils {
 //                attributes.flags |= flagTranslucentStatus;
                 attributes.flags |= flagTranslucentNavigation;
                 window.setAttributes(attributes);
-
-                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                window.getDecorView().setSystemUiVisibility(window.getDecorView().getSystemUiVisibility()
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -334,6 +348,129 @@ public class LibStatusBarUtils {
                 attributes.flags |= flagTranslucentNavigation;
                 window.setAttributes(attributes);
             }
+        }
+    }
+
+    /**
+     * 获取导航栏高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getNavigationHeight(Context context) {
+        int result = 0;
+        int resourceId = 0;
+        int rid = context.getResources().getIdentifier("config_showNavigationBar", "bool", "android");
+        if (rid != 0) {
+            resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+            return context.getResources().getDimensionPixelSize(resourceId);
+        } else
+            return 0;
+    }
+
+    /**
+     * 需要MIUIV6以上
+     *
+     * @param activity
+     * @param dark     是否把状态栏文字及图标颜色设置为深色
+     * @return boolean 成功执行返回true
+     */
+    public static boolean MIUISetStatusBarLightMode(Activity activity, boolean dark) {
+        boolean result = false;
+        Window window = activity.getWindow();
+        if (window != null) {
+            Class clazz = window.getClass();
+            try {
+                int darkModeFlag = 0;
+                Class layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
+                Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
+                darkModeFlag = field.getInt(layoutParams);
+                Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
+                if (dark) {
+                    extraFlagField.invoke(window, darkModeFlag, darkModeFlag);//状态栏透明且黑色字体
+                } else {
+                    extraFlagField.invoke(window, 0, darkModeFlag);//清除黑色字体
+                }
+                result = true;
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    //开发版 7.7.13 及以后版本采用了系统API，旧方法无效但不会报错，所以两个方式都要加上
+                    if (dark) {
+                        activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    } else {
+                        activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                    }
+                }
+            } catch (Exception e) {
+
+            }
+        }
+        return result;
+    }
+
+    private void setStatusBarMode(Activity activity, boolean dark) {
+        switch (LibRoomUtils.getLightStatausBarAvailableRomType()) {
+            case LibRoomUtils.AvailableRomType.MIUI:
+                MIUISetStatusBarLightMode(activity, dark);
+                break;
+            case LibRoomUtils.AvailableRomType.FLYME:
+                FlymeSetStatusBarLightMode(activity, dark);
+                break;
+            case LibRoomUtils.AvailableRomType.ANDROID_NATIVE:
+                setAndroidNativeLightStatusBar(activity, dark);
+                break;
+            case LibRoomUtils.AvailableRomType.NA:
+                // N/A do nothing
+                break;
+        }
+    }
+
+    /**
+     * 设置状态栏图标为深色和魅族特定的文字风格
+     * 可以用来判断是否为Flyme用户
+     *
+     * @param activity
+     * @param dark     是否把状态栏文字及图标颜色设置为深色
+     * @return boolean 成功执行返回true
+     */
+    public static boolean FlymeSetStatusBarLightMode(Activity activity, boolean dark) {
+        Window window = activity.getWindow();
+        boolean result = false;
+        if (window != null) {
+            try {
+                WindowManager.LayoutParams lp = window.getAttributes();
+                Field darkFlag = WindowManager.LayoutParams.class
+                        .getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON");
+                Field meizuFlags = WindowManager.LayoutParams.class
+                        .getDeclaredField("meizuFlags");
+                darkFlag.setAccessible(true);
+                meizuFlags.setAccessible(true);
+                int bit = darkFlag.getInt(null);
+                int value = meizuFlags.getInt(lp);
+                if (dark) {
+                    value |= bit;
+                } else {
+                    value &= ~bit;
+                }
+                meizuFlags.setInt(lp, value);
+                window.setAttributes(lp);
+                result = true;
+            } catch (Exception e) {
+
+            }
+        }
+        return result;
+    }
+
+    private static void setAndroidNativeLightStatusBar(Activity activity, boolean dark) {
+        View decor = activity.getWindow().getDecorView();
+        if (dark) {
+            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        } else {
+            // We want to change tint color to white again.
+            // You can also record the flags in advance so that you can turn UI back completely if
+            // you have set other flags before, such as translucent or full screen.
+            decor.setSystemUiVisibility(0);
         }
     }
 }

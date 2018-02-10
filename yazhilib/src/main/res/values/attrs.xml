@@ -205,9 +205,13 @@
     </declare-styleable>
 
     <attr name="vt_text" format="string"/>
+    <attr name="vt_textSize" format="integer"/>
+    <attr name="vt_textColor" format="color"/>
 
     <declare-styleable name="VerticalText">
         <attr name="vt_text"/>
+        <attr name="vt_textSize"/>
+        <attr name="vt_textColor"/>
     </declare-styleable>
 
 </resources>

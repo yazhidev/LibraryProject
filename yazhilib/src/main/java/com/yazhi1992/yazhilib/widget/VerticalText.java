@@ -52,6 +52,7 @@ public class VerticalText extends View {
     private int mOneLineTextNum;
     //列数
     private int mLineNum;
+    private int mTextColor;
 
     public VerticalText(Context context) {
         this(context, null);
@@ -71,13 +72,15 @@ public class VerticalText extends View {
         try {
             typedArray = context.obtainStyledAttributes(attrs, R.styleable.VerticalText, 0, defStyleAttr);
             mText = typedArray.getString(R.styleable.VerticalText_vt_text);
+            mTextSize = typedArray.getInteger(R.styleable.VerticalText_vt_textSize, 15);
+            mTextColor = typedArray.getColor(R.styleable.VerticalText_vt_textColor, Color.BLACK);
         } finally {
             if (typedArray != null) {
                 typedArray.recycle();
             }
         }
 
-        mTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 15f, getResources().getDisplayMetrics());
+        mTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, mTextSize, getResources().getDisplayMetrics());
         mLeftRightSpacing = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8f, getResources().getDisplayMetrics());
         mTopBottomSpacing = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8f, getResources().getDisplayMetrics());
 
@@ -92,6 +95,16 @@ public class VerticalText extends View {
 
     public void setText(String text) {
         mText = text;
+        postInvalidate();
+    }
+
+    public void setTextColor(int color) {
+        mTextColor = color;
+        postInvalidate();
+    }
+
+    public void setTextSize(int sp) {
+        mTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, getResources().getDisplayMetrics());
         postInvalidate();
     }
 
@@ -185,7 +198,7 @@ public class VerticalText extends View {
             x = i == 0 ? x - mCharWidth : x - mCharWidth - mLeftRightSpacing;
             //换行后，y轴坐标重置
             y = getCharHeight() + mCalculatePaddingTopBottom;
-            if(thisLineText == null || thisLineText.isEmpty()) continue;
+            if (thisLineText == null || thisLineText.isEmpty()) continue;
             for (int j = 0; j < thisLineText.length(); j++) {
                 y = j == 0 ? y + getPaddingTop() : y + getCharHeight() + mTopBottomSpacing;
                 //绘制text中 j 到 j+1 的字，y坐标是baseline的高度
@@ -232,7 +245,7 @@ public class VerticalText extends View {
      */
     private int getLineNum(int num) {
         if (mText == null || mText.isEmpty()) return 0;
-        if (mLineNum == 0) {
+        if (mLineNum == 0 && num != 0) {
             int result = mText.length() % num;
             mLineNum = result == 0 ? mText.length() / num : mText.length() / num + 1;
         }
