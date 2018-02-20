@@ -260,6 +260,10 @@ public class RoundLoadingView extends RelativeLayout {
         }
     }
 
+    public String getText() {
+        return mNormalText;
+    }
+
     /**
      * 单位sp
      *
