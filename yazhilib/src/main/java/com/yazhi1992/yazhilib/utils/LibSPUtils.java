@@ -26,6 +26,13 @@ public final class LibSPUtils {
         sPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
+    private static SharedPreferences getPreferences() {
+        if(sPreferences == null) {
+            init(LibUtils.getContext());
+        }
+        return sPreferences;
+    }
+
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      *
@@ -33,7 +40,7 @@ public final class LibSPUtils {
      * @param object 值
      */
     public static void put(String key, Object object) {
-        SharedPreferences.Editor editor = sPreferences.edit();
+        SharedPreferences.Editor editor = getPreferences().edit();
 
         if (object instanceof String) {
             editor.putString(key, (String) object);
@@ -59,7 +66,7 @@ public final class LibSPUtils {
      * @return Object，需要转成所需的类型
      */
     public static Object get(String key, Object defaultObject) {
-        SharedPreferences sp = sPreferences;
+        SharedPreferences sp = getPreferences();
 
         if (defaultObject instanceof String) {
             return sp.getString(key, (String) defaultObject);
@@ -83,7 +90,7 @@ public final class LibSPUtils {
      * @return String
      */
     public static String getString(final String key, final String defaultValue) {
-        return sPreferences.getString(key, defaultValue);
+        return getPreferences().getString(key, defaultValue);
     }
 
     /**
@@ -93,7 +100,7 @@ public final class LibSPUtils {
      * @param value 值
      */
     public static void setString(final String key, final String value) {
-        SharedPreferences.Editor editor = sPreferences.edit();
+        SharedPreferences.Editor editor = getPreferences().edit();
         editor.putString(key, value);
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
@@ -106,7 +113,7 @@ public final class LibSPUtils {
      * @return boolean
      */
     public static boolean getBoolean(final String key, final boolean defaultValue) {
-        return sPreferences.getBoolean(key, defaultValue);
+        return getPreferences().getBoolean(key, defaultValue);
     }
 
     /**
@@ -116,7 +123,7 @@ public final class LibSPUtils {
      * @param value 值
      */
     public static void setBoolean(final String key, final boolean value) {
-        SharedPreferences.Editor editor = sPreferences.edit();
+        SharedPreferences.Editor editor = getPreferences().edit();
         editor.putBoolean(key, value);
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
@@ -129,7 +136,7 @@ public final class LibSPUtils {
      * @return int
      */
     public static int getInt(final String key, final int defaultValue) {
-        return sPreferences.getInt(key, defaultValue);
+        return getPreferences().getInt(key, defaultValue);
     }
 
     /**
@@ -139,7 +146,7 @@ public final class LibSPUtils {
      * @param value 值
      */
     public static void setInt(final String key, final int value) {
-        SharedPreferences.Editor editor = sPreferences.edit();
+        SharedPreferences.Editor editor = getPreferences().edit();
         editor.putInt(key, value);
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
@@ -152,7 +159,7 @@ public final class LibSPUtils {
      * @return float
      */
     public static float getFloat(final String key, final float defaultValue) {
-        return sPreferences.getFloat(key, defaultValue);
+        return getPreferences().getFloat(key, defaultValue);
     }
 
     /**
@@ -162,7 +169,7 @@ public final class LibSPUtils {
      * @param value 值
      */
     public static void setFloat(final String key, final float value) {
-        SharedPreferences.Editor editor = sPreferences.edit();
+        SharedPreferences.Editor editor = getPreferences().edit();
         editor.putFloat(key, value);
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
@@ -175,7 +182,7 @@ public final class LibSPUtils {
      * @return long
      */
     public static long getLong(final String key, final long defaultValue) {
-        return sPreferences.getLong(key, defaultValue);
+        return getPreferences().getLong(key, defaultValue);
     }
 
     /**
@@ -185,7 +192,7 @@ public final class LibSPUtils {
      * @param value 值
      */
     public static void setLong(final String key, final long value) {
-        SharedPreferences.Editor editor = sPreferences.edit();
+        SharedPreferences.Editor editor = getPreferences().edit();
         editor.putLong(key, value);
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
@@ -196,7 +203,7 @@ public final class LibSPUtils {
      * @return 所有的键值对
      */
     public static Map<String, ?> getAll() {
-        return sPreferences.getAll();
+        return getPreferences().getAll();
     }
 
     /**
@@ -206,7 +213,7 @@ public final class LibSPUtils {
      * @return 是|否
      */
     public static boolean contains(String key) {
-        return sPreferences.contains(key);
+        return getPreferences().contains(key);
     }
 
     /**
@@ -215,7 +222,7 @@ public final class LibSPUtils {
      * @param key 键
      */
     public static void remove(String key) {
-        SharedPreferences.Editor editor = sPreferences.edit();
+        SharedPreferences.Editor editor = getPreferences().edit();
         editor.remove(key);
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
@@ -224,7 +231,7 @@ public final class LibSPUtils {
      * 清除所有数据
      */
     public static void clear() {
-        SharedPreferences.Editor editor = sPreferences.edit();
+        SharedPreferences.Editor editor = getPreferences().edit();
         editor.clear();
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }

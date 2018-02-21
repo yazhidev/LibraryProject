@@ -1,6 +1,7 @@
 package com.yazhi1992.yazhilib.utils;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -40,6 +41,16 @@ public class LibUtils {
     private static final String DEBUG_TAG = "zyz";
 
     private LibUtils() {
+    }
+
+    public static Application application;
+
+    public static void init(Application context) {
+        application = context;
+    }
+
+    protected static Application getContext() {
+        return application;
     }
 
     /**
@@ -319,6 +330,32 @@ public class LibUtils {
         int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         view.measure(w, h);
+    }
+
+    private static String oldMsg;
+    private static Toast toast = null;
+    private static long firstTime = 0;
+    private static long secondTime = 0;
+
+    public static void showToast(String msg) {
+        if(msg == null) return;
+        if (toast == null) {
+            toast = Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT);
+            toast.show();
+            firstTime = System.currentTimeMillis();
+        } else {
+            secondTime = System.currentTimeMillis();
+            if (msg.equals(oldMsg)) {
+                if (secondTime - firstTime > Toast.LENGTH_SHORT) {
+                    toast.show();
+                }
+            } else {
+                oldMsg = msg;
+                toast.setText(msg);
+                toast.show();
+            }
+        }
+        firstTime = secondTime;
     }
 
     public static void showToast(Context context, String msg) {
@@ -647,6 +684,7 @@ public class LibUtils {
 
     /**
      * 阿拉伯数字转中文
+     *
      * @param intInput
      * @return
      */
