@@ -23,6 +23,7 @@ public class KeyBoardHeightUtil {
      * @param listener
      */
     public static void getKeyBoardHeight(final View rootView, final KeyBoardHeightListener listener) {
+        mNavigationHeight = -1;
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
