@@ -28,7 +28,7 @@ public class VerticalText extends View {
 
     private String mText = "";
     //分割符号
-    private String mSubStringStr = "，";
+    private String mSubStringStr = ",|。|，|\n|\\.";
     private Paint mTextPaint;
     private float mTextSize;
     //屏幕宽高
@@ -120,7 +120,7 @@ public class VerticalText extends View {
             mHeight = hSize;
             setCalculatePaddingTopBottom();
         } else {
-            if (!mSubStringStr.isEmpty() && mText != null && mText.contains(mSubStringStr)) {
+            if (!mSubStringStr.isEmpty() && mText != null) {
                 //有分割符号
                 String[] split = mText.split(mSubStringStr);
                 for (String s : split) {
@@ -134,7 +134,7 @@ public class VerticalText extends View {
         }
 
         mFormatTexts.clear();
-        if (!mSubStringStr.isEmpty() && mText != null && mText.contains(mSubStringStr)) {
+        if (!mSubStringStr.isEmpty() && mText != null) {
             //有分割符号
             String[] split = mText.split(mSubStringStr);
             for (String s : split) {
