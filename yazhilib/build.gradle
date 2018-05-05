@@ -3,17 +3,14 @@ apply plugin: 'com.android.library'
 //apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 21
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -24,18 +21,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile rootProject.ext.appcompatV7
-
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.dependencies.appcompatV7
+    implementation rootProject.ext.dependencies.retrofit
+    implementation rootProject.ext.dependencies.adapter_rxjava
+    api rootProject.ext.dependencies.converter_gson
+    implementation rootProject.ext.dependencies.okhttp3_logging_interceptor
     //rxjava
-    compile rootProject.ext.rxjava
-    compile rootProject.ext.rxandroid
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
 }
 //
 //version = "0.0.3"    //这个是版本号，必须填写
